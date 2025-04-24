@@ -1,3 +1,3 @@
 # Auth Summary.Md
 
-Error generating authentication summary. Please check the logs for details.
+Error: Could not find repository or service information.

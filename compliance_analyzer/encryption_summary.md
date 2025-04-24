@@ -1,3 +1,3 @@
 # Encryption Summary.Md
 
-Error generating encryption summary. Please check the logs for details.
+Error: Could not find repository or service information.
