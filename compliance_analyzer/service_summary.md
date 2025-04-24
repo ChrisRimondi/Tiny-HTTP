@@ -1,7 +1,7 @@
 # Service Summary.Md
 
 # Summary of the TinyHTTP Service
-
+one small change.
 ## 1. Main Purpose and Functionality
 The TinyHTTP service is designed as an asynchronous HTTP server, capable of handling incoming requests and serving static content. Its architecture is primarily focused on operational purposes, enabling the management of HTTP interactions without incorporating comprehensive security measures.
 
