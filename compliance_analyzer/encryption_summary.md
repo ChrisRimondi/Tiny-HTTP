@@ -1,5 +1,5 @@
 # Encryption Summary.Md
-
+I fixed this!
 # Summary of Encryption and Data Protection Mechanisms
 
 ## 1. Encryption Methods
