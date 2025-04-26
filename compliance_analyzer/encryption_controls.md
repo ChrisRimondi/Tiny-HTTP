@@ -4,59 +4,59 @@
 {
   "implemented-requirements": [
     {
-      "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "uuid": "f902d5e1-17f8-4e2b-bf12-81c56e0e3f1d",
       "control-id": "CRY-01.3",
-      "description": "The software implements cryptographic mechanisms to ensure data confidentiality and integrity during transmission by utilizing TLS 1.2. This is achieved by configuring the web server to enforce HTTPS using a valid SSL certificate, preventing unauthorized access during data transmission."
+      "description": "The system integrates cryptographic mechanisms to ensure confidentiality and integrity during preparation for transmission. Sensitive data is encrypted using AES-256 before transmission, ensuring that only authorized parties can decrypt and access the information."
     },
     {
-      "uuid": "b1c2d3e4-f5g6-7890-abcd-ef1234567891",
+      "uuid": "c6c5d3f9-0a11-4d5b-bf6f-fb8d8f5ae3c2",
       "control-id": "CRY-01.4",
-      "description": "The software employs cryptographic techniques to randomize communication patterns by implementing a secure session management system. This ensures that session identifiers are unique and unpredictable, minimizing the risk of session hijacking."
+      "description": "The application utilizes a method to randomize communication patterns by implementing a token-based system, which conceals the actual communication flow, making it difficult for adversaries to predict the sequence of messages."
     },
     {
-      "uuid": "c1d2e3f4-g5h6-7890-abcd-ef1234567892",
+      "uuid": "8f4e84b8-2f61-4660-8873-1cfb4c6e3c34",
       "control-id": "CRY-02",
-      "description": "Automated mechanisms for authentication to cryptographic modules are implemented using secure API calls that authenticate the server to a Hardware Security Module (HSM) for key management. This ensures that only authorized systems can access cryptographic functions."
+      "description": "Automated mechanisms employ OAuth 2.0 for systems to authenticate securely to the cryptographic module, ensuring that only verified entities can access cryptographic services."
     },
     {
-      "uuid": "d1e2f3g4-h5i6-7890-abcd-ef1234567893",
+      "uuid": "d1eb4abc-04d8-4d8b-9f34-1c1f28f7f7b8",
       "control-id": "CRY-06",
-      "description": "Non-console administrative access is protected using a VPN and strong encryption protocols. All administrative actions are logged, and access is restricted to authenticated and authorized users only."
+      "description": "The software utilizes TLS 1.2 for non-console administrative access, ensuring that all administrative traffic is encrypted to protect confidentiality and integrity from potential eavesdropping."
     },
     {
-      "uuid": "e1f2g3h4-i5j6-7890-abcd-ef1234567894",
+      "uuid": "1c9f4d9c-0a4d-4c75-b6f5-a69c1c56e4ef",
       "control-id": "CRY-08",
-      "description": "The organization has implemented an internal Public Key Infrastructure (PKI) using a dedicated certificate authority (CA) to issue and manage digital certificates securely. This includes regular audits and updates to the PKI system to maintain security."
+      "description": "An internal Public Key Infrastructure (PKI) is securely implemented, utilizing a CA server to issue certificates that strengthen secure communications within the network."
     },
     {
-      "uuid": "f1g2h3i4-j5k6-7890-abcd-ef1234567895",
+      "uuid": "7b4b0e4b-dc4e-4c44-b7a9-6761c0e4f3b2",
       "control-id": "CRY-09",
-      "description": "The software includes mechanisms for cryptographic key management, ensuring that keys are stored securely using encryption at rest and that access is controlled through role-based access controls (RBAC)."
+      "description": "The organization implements a key management solution that includes automated key rotation and storage, ensuring the confidentiality, integrity, and availability of cryptographic keys."
     },
     {
-      "uuid": "g1h2i3j4-k5l6-7890-abcd-ef1234567896",
+      "uuid": "e0b4c305-4e9e-4f96-bd1e-1a9f5a1d3b03",
       "control-id": "CRY-09.1",
-      "description": "The system facilitates the production and management of symmetric cryptographic keys using FIPS-compliant key management technology. Regular key rotation policies are enforced to enhance security."
+      "description": "Symmetric keys are generated and managed using FIPS-compliant key management technology, ensuring compliance with federal standards for key production and management."
     },
     {
-      "uuid": "h1i2j3k4-l5m6-7890-abcd-ef1234567897",
+      "uuid": "b3e4f89e-2b31-4e2f-a1a6-1a9f5a1d3b4c",
       "control-id": "CRY-09.2",
-      "description": "Asymmetric cryptographic keys are generated and managed using FIPS-compliant processes to protect the user's private key. This includes secure storage and access controls to prevent unauthorized access."
+      "description": "Asymmetric keys are generated and managed using FIPS-compliant methods, ensuring that private keys are adequately protected and managed throughout their lifecycle."
     },
     {
-      "uuid": "i1j2k3l4-m5n6-7890-abcd-ef1234567898",
+      "uuid": "e5c6c8a0-5e72-4c90-8f7d-6b1f8c7b4b54",
       "control-id": "CRY-09.4",
-      "description": "The secure distribution of symmetric and asymmetric cryptographic keys is facilitated through established key exchange protocols such as Diffie-Hellman, ensuring that keys are exchanged securely."
+      "description": "The secure distribution of both symmetric and asymmetric cryptographic keys is facilitated through an industry-recognized key management platform, ensuring that keys are transmitted securely and are only accessible by authorized entities."
     },
     {
-      "uuid": "j1k2l3m4-n5o6-7890-abcd-ef1234567899",
+      "uuid": "b1f2d3e6-6d51-4e2b-8a4b-1a9f5a1d3b4d",
       "control-id": "CRY-09.5",
-      "description": "Cryptographic keys are bound to individual identities using identity management systems that enforce strict authentication and authorization protocols, ensuring accountability."
+      "description": "Mechanisms are in place to bind cryptographic keys to individual identities through a user authentication system, ensuring accountability and traceability for key usage."
     },
     {
-      "uuid": "k1l2m3n4-o5p6-7890-abcd-ef1234567800",
+      "uuid": "f3e5e9b4-2e3f-4a5f-9f6d-1a9f5a1d4d5d",
       "control-id": "CRY-09.6",
-      "description": "Customers are provided with comprehensive key management guidance whenever cryptographic keys are shared, including best practices for storage and use to ensure security."
+      "description": "Guidance is provided to customers regarding key management practices when sharing cryptographic keys, ensuring that appropriate security measures are followed."
     }
   ]
 }
