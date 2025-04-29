@@ -1,3 +1,59 @@
 {
-  "implemented-requirements": []
+  "implemented-requirements": [
+    {
+      "uuid": "e1c3d1b5-bf6f-4e05-b16c-08e28e4c8d3a",
+      "control-id": "CRY-01.3",
+      "description": "While the current implementation lacks cryptographic mechanisms for ensuring confidentiality and integrity during data transmission and reception, it is essential to incorporate these mechanisms to meet compliance requirements. Specifically, the integration of TLS for secure transmission should be prioritized."
+    },
+    {
+      "uuid": "b3f9d4c2-7b1e-4f4e-a8f1-e1a2e0c6a7c8",
+      "control-id": "CRY-01.4",
+      "description": "The code does not implement any cryptographic mechanisms to conceal or randomize communication patterns, which poses a significant risk to data privacy. Future implementations should consider utilizing techniques such as traffic padding or session tokenization to obscure communication patterns."
+    },
+    {
+      "uuid": "d8f9e2df-ec9d-4b3d-8b5c-39f5f9f1c3f3",
+      "control-id": "CRY-02",
+      "description": "Currently, the software does not include automated mechanisms for authenticating to a cryptographic module. Implementing a secure authentication method, such as utilizing API tokens or secure certificates, is necessary to enhance the security of cryptographic operations."
+    },
+    {
+      "uuid": "a6f1b4c2-0a6d-4f3b-bc62-4c619bc2f1c6",
+      "control-id": "CRY-06",
+      "description": "The implementation lacks cryptographic mechanisms for protecting the confidentiality and integrity of non-console administrative access. Future iterations should introduce secure access methods, such as SSH with public key authentication, to safeguard administrative functions."
+    },
+    {
+      "uuid": "4f1c8e2e-0a1c-4d24-bd64-e17d6c1a4c3e",
+      "control-id": "CRY-08",
+      "description": "No mechanisms are currently in place to securely implement an internal Public Key Infrastructure (PKI) or to obtain PKI services from a reputable provider. Establishing a PKI system with proper certificate management practices is crucial for securing communications."
+    },
+    {
+      "uuid": "8f2b8c2a-4b0e-4908-8d8c-47e2b1f9a4f3",
+      "control-id": "CRY-09",
+      "description": "The software does not facilitate any cryptographic key management controls, which compromises the confidentiality, integrity, and availability of keys. Future implementations must establish protocols for key generation, storage, and access to ensure secure key management."
+    },
+    {
+      "uuid": "c2e8f4a9-9b3e-4f0c-bd62-6369f2a1c0c2",
+      "control-id": "CRY-09.1",
+      "description": "There are currently no mechanisms for the production and management of symmetric cryptographic keys using FIPS-compliant technology. The implementation of FIPS-compliant key management processes should be prioritized to meet regulatory standards."
+    },
+    {
+      "uuid": "f7d2f2a2-7c4f-4d3c-ba0b-5b7e1e3c3c7e",
+      "control-id": "CRY-09.2",
+      "description": "The system does not facilitate the production and management of asymmetric cryptographic keys using FIPS-compliant practices. To enhance security, it is important to implement proper key management processes that safeguard user private keys."
+    },
+    {
+      "uuid": "b4e0d9c0-3f9e-4f8c-bc2f-8b9f1e7d9e1d",
+      "control-id": "CRY-09.4",
+      "description": "The current implementation lacks mechanisms for the secure distribution of symmetric and asymmetric cryptographic keys. Future implementations should utilize recognized key management technologies and processes to facilitate secure key distribution."
+    },
+    {
+      "uuid": "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
+      "control-id": "CRY-09.5",
+      "description": "There are no mechanisms to ensure cryptographic keys are bound to individual identities, which is a critical aspect of secure key management. Future implementations should enforce key binding practices to enhance user accountability."
+    },
+    {
+      "uuid": "f6a9b8c7-d8e4-4c2b-a1b0-1c4d5e7f8g9h",
+      "control-id": "CRY-09.6",
+      "description": "The software currently does not provide customers with appropriate key management guidance when cryptographic keys are shared. Establishing a clear policy and guidelines for key management is essential to ensure secure sharing practices."
+    }
+  ]
 }
