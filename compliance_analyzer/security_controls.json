@@ -5,7 +5,7 @@
       "control-name": "Concurrent Session Control",
       "description": "Limit the number of concurrent sessions for each {{ insert: param, ac-10_odp.01 }} to {{ insert: param, ac-10_odp.02 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any session management or tracking mechanisms, nor does it have authentication or identity management features. Consequently, there is no capability to limit or control the number of concurrent sessions per user or entity. This represents a significant gap in satisfying AC-10, as the service does not restrict concurrent session count nor provide any inherent or configurable means to do so.",
+      "explanation": "The TinyHTTP service does not implement any form of session management or tracking, which is necessary to enforce limits on concurrent sessions. Additionally, there are no authentication mechanisms or identity management systems in place to identify discrete users or entities for which concurrent session control could be applied. Without these foundational security controls, the service cannot limit the number of concurrent sessions per user or entity, representing a significant gap in compliance with the AC-10 control.",
       "configuration": ""
     },
     {
@@ -13,91 +13,88 @@
       "control-name": "Session Termination",
       "description": "Automatically terminate a user session after {{ insert: param, ac-12_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of session management or tracking. There is no concept of user sessions within the service, and thus no mechanism to automatically terminate sessions after a period of inactivity or a predefined timeout. This represents a significant gap in meeting the requirements of AC-12.",
+      "explanation": "The TinyHTTP service does not implement any session management or tracking mechanisms. Since there are no user sessions established, there is no control or functionality in place to automatically terminate sessions after any timeout period, which represents a significant gap in satisfying this control.",
       "configuration": ""
     },
     {
       "control-id": "ac-12.1",
       "control-name": "User-initiated Logouts",
       "description": "Provide a logout capability for user-initiated communications sessions whenever authentication is used to gain access to {{ insert: param, ac-12.01_odp }}.",
-      "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, session management, or user identity management. Since there is no authentication or session tracking, there is no user login or session that requires a logout capability. Therefore, the control is applicable because authentication access would normally require logout capabilities, but it currently represents a gap because no logout functionality is provided or needed due to the lack of authentication."
+      "status": "not applicable",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or session management. Since users do not authenticate to access the service, there is no need to provide a user-initiated logout capability."
     },
     {
       "control-id": "ac-12.2",
       "control-name": "Termination Message",
       "description": "Display an explicit logout message to users indicating the termination of authenticated communications sessions.",
       "status": "not applicable",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or session management. Since it does not establish authenticated communication sessions, displaying an explicit logout message to users is not applicable in this context.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication or session management mechanisms. Without authenticated communication sessions, there is no need to display termination or logout messages to users."
     },
     {
       "control-id": "ac-17.2",
       "control-name": "Protection of Confidentiality and Integrity Using Encryption",
       "description": "Implement cryptographic mechanisms to protect the confidentiality and integrity of remote access sessions.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any cryptographic mechanisms such as TLS/SSL to protect the confidentiality and integrity of remote access sessions. Data is transmitted unencrypted, exposing all remote connections to potential interception and tampering. No configuration or code exists to enable encrypted communication channels or session protection."
+      "explanation": "The TinyHTTP service transmits data, including potentially sensitive HTTP requests, over the network without any encryption. There is no implementation of cryptographic mechanisms such as TLS/SSL to protect the confidentiality and integrity of remote access sessions. Consequently, remote access sessions are vulnerable to eavesdropping and tampering attacks. No configuration or code related to encryption or cryptographic protection was found, representing a clear security gap for this control.",
+      "configuration": ""
     },
     {
       "control-id": "ac-2.10",
       "control-name": "Shared and Group Account Credential Change",
       "description": "AC-02(10)",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication or identity management mechanisms, nor does it manage credentials for shared or group accounts. Since there is no mechanism for credential storage or usage within the service, there are no controls or processes in place to change credentials for shared or group accounts, representing a security gap in managing shared account credentials."
+      "explanation": "The TinyHTTP service does not implement any identity management, authentication mechanisms, or access control policies. Consequently, there are no shared or group accounts managed by the system, nor are there credential change controls for such accounts. This represents a gap in the security controls since no process or mechanism exists to update or change shared account credentials, posing a risk if such accounts exist outside of the system or need to be managed securely."
     },
     {
       "control-id": "ac-2.2",
       "control-name": "Automated Temporary and Emergency Account Management",
       "description": "Automatically disable temporary and emergency accounts after {{ insert: param, ac-02.02_odp.02 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication, identity management, or account management mechanisms, including temporary or emergency accounts. As such, there is no automated process to disable such accounts after a specified time period, resulting in a gap for this control.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any identity management or authentication mechanisms, and consequently does not manage user accounts, including temporary or emergency accounts. Therefore, there is no automated process or configuration in place to disable such accounts after a designated period, representing a security control gap."
     },
     {
       "control-id": "ac-2.3smt.a",
       "control-name": "Disable Accounts",
       "description": "Have expired;",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any identity management, authentication mechanisms, or account management features. Since there are no user accounts or credentials maintained by the system, there is no capability or process to disable accounts when they have expired. This represents a gap in implementing the control as the system has no means to enforce or manage account expirations."
+      "explanation": "The TinyHTTP service does not implement any authentication or identity management mechanisms, meaning there are no accounts to disable or expire. Therefore, the control to disable expired accounts is not addressed and represents a significant security gap in the system."
     },
     {
       "control-id": "ac-2.3smt.b",
       "control-name": "Disable Accounts",
       "description": "Are no longer associated with a user or individual;",
-      "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any identity management system, authentication mechanisms, or user accounts. Consequently, there are no user accounts to disable when they are no longer associated with an individual, representing a gap in meeting this control requirement.",
-      "configuration": ""
+      "status": "applicable but only satisfied through configuration",
+      "explanation": "The TinyHTTP service does not implement any authentication or identity management. Therefore, user accounts are not managed within the system itself. However, if user accounts existed or were associated externally, the disabling of such accounts would need to be managed via configuration or external identity management systems. Since there is no built-in mechanism within the service's code or configuration to disable or remove user accounts, any enforcement of this control depends solely on configuration or external processes.",
+      "configuration": "No configuration files related to user accounts or disabling them exist in the current codebase. If user accounts were managed externally, disabling accounts would occur outside of the service configuration. The service itself contains no JSON or YAML configuration keys related to accounts or account status that can be configured to disable accounts."
     },
     {
       "control-id": "ac-2.3smt.c",
       "control-name": "Disable Accounts",
       "description": "Are in violation of organizational policy; or",
-      "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication or identity management systems. Consequently, there is no mechanism to create, manage, or disable user accounts. This represents a significant security gap as accounts cannot be disabled if they are in violation of policy or for any other reason. Without account management functionality, the control to disable accounts cannot be satisfied.",
-      "configuration": ""
+      "status": "applicable but only satisfied through configuration",
+      "explanation": "The TinyHTTP service does not implement any authentication, identity management, or access control mechanisms inherently in its codebase. Therefore, the control requiring disabling accounts that violate policy cannot be inherently satisfied by the service itself. However, this control can be met through external configuration or management of user accounts at the system or network level (e.g., OS user accounts, firewall rules, or upstream authentication services). Since no internal mechanisms exist, implementation of account disabling depends wholly on such configuration external to the service.",
+      "configuration": "No configuration files within the service (such as json or yaml) contain account or user management settings. The responsibility for disabling accounts violating policy lies outside the service in the host operating system or infrastructure components. For example, on a Linux host running TinyHTTP, accounts can be disabled via system user management commands or PAM configurations. There are no internal configuration files in the TinyHTTP project enabling or managing account disabling."
     },
     {
       "control-id": "ac-2.3smt.d",
       "control-name": "Disable Accounts",
       "description": "Have been inactive for {{ insert: param, ac-02.03_odp.02 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any identity management or authentication mechanisms, thus no user accounts exist to disable due to inactivity. This represents a gap with respect to disabling inactive accounts as no account lifecycle management or inactivity checks are implemented.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any identity management or account systems. There is no functionality for user accounts, authentication, or authorization, and consequently, no mechanism to disable inactive accounts. This represents a gap against the control requirement to disable user accounts after a period of inactivity."
     },
     {
       "control-id": "ac-2.4",
       "control-name": "Automated Audit Actions",
       "description": "Automatically audit account creation, modification, enabling, disabling, and removal actions.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication or identity management system, and thus does not support user accounts or account lifecycle actions such as creation, modification, enabling, disabling, or removal. Furthermore, no audit logging mechanisms are in place to capture such account-related actions. Consequently, the service lacks automated audit actions for account management activities, resulting in a compliance gap for this control.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service lacks any form of authentication, identity management, or account management functionality. Consequently, there are no account creation, modification, enabling, disabling, or removal actions performed within the system to audit. Additionally, while basic logging exists for connection attempts and HTTP requests, it does not include auditing of account lifecycle events or actions due to the absence of accounts altogether. Therefore, the control is applicable because such auditing is necessary for account-related actions, but it represents a gap as there is no mechanism to perform automated auditing of these actions within the service."
     },
     {
       "control-id": "ac-3",
       "control-name": "Access Enforcement",
       "description": "Enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication or authorization mechanisms, nor does it enforce access control policies. This leaves the system vulnerable to unauthorized access as no logical access enforcement is performed on information or system resources.",
+      "explanation": "The TinyHTTP service does not implement any authentication, authorization, or access control mechanisms. There are no access control policies enforced, no identity management, and no session handling. As a result, the system is vulnerable to unauthorized access and does not satisfy the requirements of access enforcement.",
       "configuration": ""
     },
     {
@@ -105,7 +102,7 @@
       "control-name": "Discretionary Access Control",
       "description": "Pass the information to any other subjects or objects;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any access control mechanisms, including discretionary access control (DAC). There are no authentication or authorization models in place to restrict or control how information is passed between subjects or objects. Therefore, the control is applicable but represents a security gap.",
+      "explanation": "The TinyHTTP service does not implement any form of access control, including discretionary access control. There are no authentication or authorization mechanisms in place, and no policies to restrict or control the passing of information to other subjects or objects. This represents a clear security gap in enforcing discretionary access control, exposing the system to unauthorized data access and transfer risks.",
       "configuration": ""
     },
     {
@@ -113,7 +110,7 @@
       "control-name": "Discretionary Access Control",
       "description": "Grant its privileges to other subjects;",
       "status": "gap",
-      "explanation": "The TinyHTTP service currently has no implementation of access control mechanisms. There are no discretionary access controls in place, and the service does not support granting privileges to other subjects or users. This represents a clear gap with respect to the control requirement.",
+      "explanation": "The TinyHTTP service does not implement any form of access control mechanisms, including discretionary access control. There are no authentication or authorization policies, no identity management, and no configuration allowing the granting of privileges from one subject to another. Therefore, this control is applicable but currently represents a gap as the service does not support discretionary access control or privilege delegation.",
       "configuration": ""
     },
     {
@@ -121,7 +118,7 @@
       "control-name": "Discretionary Access Control",
       "description": "Change security attributes on subjects, objects, the system, or the system\u2019s components;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of access control or authorization models. There are no mechanisms to change or enforce security attributes on subjects or objects within the system. This represents a critical gap as there is no discretionary access control to protect or restrict access to system components or data.",
+      "explanation": "The TinyHTTP service does not implement any access control mechanisms, including discretionary access control. There is no functionality to change or manage security attributes related to subjects or objects within the system. This represents a significant security gap as unauthorized access or modification to the system components is not restricted or controlled.",
       "configuration": ""
     },
     {
@@ -129,14 +126,15 @@
       "control-name": "Discretionary Access Control",
       "description": "Choose the security attributes to be associated with newly created or revised objects; or",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of access control or authorization model, including discretionary access control. There are no mechanisms to associate security attributes with newly created or revised objects, nor are there policies or configurations in place to enforce access restrictions. This represents a significant security gap as the service is open to unauthorized access with no controls governing object access."
+      "explanation": "The TinyHTTP service does not implement any access control mechanisms, including discretionary access control. There is no authentication, authorization, identity management, or any mechanism to associate security attributes with newly created or revised objects. This represents a significant security gap as unauthorized access to objects (files, resources) is possible without any restrictions or attribute enforcement.",
+      "configuration": ""
     },
     {
       "control-id": "ac-3.4smt.e",
       "control-name": "Discretionary Access Control",
       "description": "Change the rules governing access control.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of access control mechanisms, including discretionary access control rules. There are no authorization models, policies, or configurations in place to manage or modify access privileges. This represents a significant security gap as there is no way to govern who can access or modify resources within the system.",
+      "explanation": "The TinyHTTP service does not implement any access control mechanisms. There is no authorization model, no identity management, and no session handling, and access control measures are entirely absent. Consequently, there are no rules governing access control to change, representing a critical security gap impacting discretionary access control requirements.",
       "configuration": ""
     },
     {
@@ -144,7 +142,7 @@
       "control-name": "Information Flow Enforcement",
       "description": "Enforce approved authorizations for controlling the flow of information within the system and between connected systems based on {{ insert: param, ac-04_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authorization mechanisms or access control policies to enforce approved information flow within the system or between connected systems. There are no controls enforcing or restricting how information is transmitted or accessed, which means that information flow is not controlled according to approved authorizations. This represents a significant gap in enforcing the AC-4 security control.",
+      "explanation": "The TinyHTTP service does not implement any form of authorization or access control mechanisms to enforce approved information flow within the system or between connected systems. There are no policies, controls, or configurations that restrict or govern how data flows internally or externally. Furthermore, there is no encryption or protection of data in transit or at rest, which exacerbates the risk of unauthorized data exposure. This represents a significant security gap in enforcing information flow policies as required by the control.",
       "configuration": ""
     },
     {
@@ -152,14 +150,15 @@
       "control-name": "Prohibit Non-privileged Users from Executing Privileged Functions",
       "description": "Prevent non-privileged users from executing privileged functions.",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any form of authentication or authorization mechanisms, meaning there is no differentiation between privileged and non-privileged users. Consequently, the system does not restrict any user actions or functions based on privilege levels, allowing all users to potentially execute privileged functions without control. This constitutes a clear gap in implementing the control AC-6.10."
+      "explanation": "The TinyHTTP service does not implement any authentication or authorization mechanisms. Without these controls, there is no differentiation between privileged and non-privileged users, allowing any user to access all service functions indiscriminately. Consequently, the service does not prevent non-privileged users from executing privileged functions, constituting a clear gap with respect to this control.",
+      "configuration": ""
     },
     {
       "control-id": "ac-6.8",
       "control-name": "Privilege Levels for Code Execution",
       "description": "Prevent the following software from executing at higher privilege levels than users executing the software: {{ insert: param, ac-06.08_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanisms to restrict software from executing at higher privilege levels than the users executing the software. There is no indication of privilege separation, sandboxing, or use of least privilege principles in the service architecture or configurations. Moreover, the service runs as a Python application without evidence of running under reduced privilege accounts or containers. This represents a gap in controlling privilege levels for code execution that could lead to privilege escalation risks.",
+      "explanation": "The TinyHTTP service does not implement any mechanisms or configurations to restrict software from executing at higher privilege levels than users. There is no access control, authorization, or identity management system in place, nor is there any indication of privilege separation in the service or underlying process execution. This represents a direct gap in enforcing the control AC-6.8 requirement.",
       "configuration": ""
     },
     {
@@ -167,15 +166,14 @@
       "control-name": "Log Use of Privileged Functions",
       "description": "Log the execution of privileged functions.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of authentication or authorization; consequently, it does not define privileged functions or roles. Basic logging exists but only records connection attempts and HTTP requests without distinguishing or logging execution of privileged functions. There is no mechanism to identify or log privileged function use, representing a significant gap in satisfying this control.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication or authorization mechanisms, thus no privileged functions or elevated access roles exist within the system. Furthermore, the service only has basic logging of connection attempts and HTTP requests, which does not include logging of the execution of privileged functions. As a result, the control is applicable because privileged function access should be logged, but there is a clear gap because such logging is absent and no privileged functions are identified or tracked."
     },
     {
       "control-id": "ac-7smt.a",
       "control-name": "Unsuccessful Logon Attempts",
       "description": "Enforce a limit of {{ insert: param, ac-07_odp.01 }} consecutive invalid logon attempts by a user during a {{ insert: param, ac-07_odp.02 }} ; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or user logon functionality. Therefore, there is no enforcement of limits on consecutive invalid logon attempts. This represents a significant security gap as there is no control to prevent brute force or repeated unauthorized access attempts.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or session handling. Consequently, there is no handling or enforcement of limits on consecutive invalid logon attempts. This represents a significant security gap as the system does not mitigate potential brute-force logon attempts or unauthorized access through login failures.",
       "configuration": ""
     },
     {
@@ -183,23 +181,22 @@
       "control-name": "Unsuccessful Logon Attempts",
       "description": "Automatically {{ insert: param, ac-07_odp.03 }} when the maximum number of unsuccessful attempts is exceeded.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, and therefore does not track or limit unsuccessful logon attempts. There is no configuration or code to automate actions such as locking accounts or throttling login attempts after maximum unsuccessful attempts are reached, which represents a significant security gap with respect to this control.",
-      "configuration": "No relevant configuration files or settings exist in the system to address unsuccessful logon attempt handling."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, and therefore does not track logon attempts or enforce limits on unsuccessful authentication attempts. Consequently, the control for automatically handling maximum unsuccessful logon attempts is not implemented and represents a security gap.",
+      "configuration": ""
     },
     {
       "control-id": "ac-9",
       "control-name": "Previous Logon Notification",
       "description": "Notify the user, upon successful logon to the system, of the date and time of the last logon.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication or user identity management mechanisms, and consequently does not notify users of previous logon times upon successful login. There is no session handling or user login process where such a notification could be applied, representing a gap against this control requirement.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanism or user login process. Without user identity management or logon functionality, there is no user session context in which to notify the user about previous logon times. Consequently, the control is applicable since users can access the system, but it is not satisfied. There is a gap because no previous logon notification is provided, and the service lacks the foundational ability to track or notify users of their last successful logon."
     },
     {
       "control-id": "au-10",
       "control-name": "Non-repudiation",
       "description": "Provide irrefutable evidence that an individual (or process acting on behalf of an individual) has performed {{ insert: param, au-10_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management, resulting in no capability to irrefutably link actions or requests to an individual or authenticated process. Additionally, there is no audit logging that ensures data integrity or tamper-proof records that would serve as non-repudiation evidence. Without authentication, identity tracking, or secure, immutable audit logs, the service cannot provide irrefutable evidence that a particular individual or process performed any action, constituting a significant non-repudiation gap.",
+      "explanation": "The TinyHTTP service lacks authentication and identity management mechanisms, and does not implement any access control or session handling. Furthermore, audit logs do not ensure data integrity or provide cryptographic proof of actions, which are essential for non-repudiation. Given these factors, the service does not provide irrefutable evidence that an individual or process has performed actions, resulting in a non-repudiation gap.",
       "configuration": ""
     },
     {
@@ -207,7 +204,7 @@
       "control-name": "Audit Record Generation",
       "description": "Provide audit record generation capability for the event types the system is capable of auditing as defined in [AU-2a](#au-2_smt.a) on {{ insert: param, au-12_odp.01 }};",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests. This logging lacks sufficient detail, structure, and comprehensive event coverage necessary to satisfy the requirements of audit record generation as defined in AU-2a. Furthermore, there is no evidence of a robust audit record generation capability for all relevant event types, nor are there mechanisms to ensure audit data integrity or sensitivity filtering. Therefore, there is a significant gap in meeting the audit record generation control requirements.",
+      "explanation": "The TinyHTTP service implements basic logging that captures connection attempts and HTTP requests. However, it lacks comprehensive audit record generation capabilities required by the control AU-12smt.a. There is no evidence of audit logging for all defined event types as per AU-2a, nor mechanisms to ensure log integrity, filtering of sensitive information, or standardized audit record formats. Additionally, no configuration files or settings indicate that audit records are generated consistently or thoroughly for all auditable events.",
       "configuration": ""
     },
     {
@@ -215,15 +212,15 @@
       "control-name": "Audit Record Generation",
       "description": "Allow {{ insert: param, au-12_odp.02 }} to select the event types that are to be logged by specific components of the system; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements basic logging that captures connection attempts and HTTP requests; however, it does not allow selecting specific event types to be logged by different system components. There is no configuration or functionality enabling customization or fine-grained control over audit log event types. Additionally, logs lack structure, sensitivity filtering, and the mechanisms to ensure integrity or tamper protection. This represents a gap in compliance with control au-12smt.b.",
-      "configuration": "No configuration files (json or yaml) exist to control audit log event types in the system. Logging is hardcoded and does not expose configurable parameters for audit event selection."
+      "explanation": "The TinyHTTP service includes basic logging for connection attempts and HTTP requests but lacks the ability to select or customize specific event types to be logged by different components. There is no evidence of configurable audit record generation or fine-grained audit event selection. Logging is minimal and does not meet the requirement to allow designated parties to select which types of events are logged. This represents a gap in audit record generation controls according to AU-12smt.b.",
+      "configuration": ""
     },
     {
       "control-id": "au-12smt.c",
       "control-name": "Audit Record Generation",
       "description": "Generate audit records for the event types defined in [AU-2c](#au-2_smt.c) that include the audit record content defined in [AU-3](#au-3).",
       "status": "gap",
-      "explanation": "While the TinyHTTP service implements basic logging of connection attempts and HTTP requests, it does not fully satisfy the control AU-12smt.c. The logs lack comprehensive audit record generation for all required event types defined in AU-2c, and the audit records do not include the detailed content as defined in AU-3. Additionally, the logs do not ensure integrity or sensitivity filtering, and there is no configuration or mechanism ensuring completeness, timeliness, and security of audit records. Therefore, there is a gap between the current logging implementation and the control requirements.",
+      "explanation": "The TinyHTTP service implements only basic logging for connection attempts and HTTP requests, but these logs do not meet the requirements for generating comprehensive audit records as defined in AU-2c and AU-3. Specifically, the logs lack detailed event types, comprehensive audit content, integrity protections, and structured audit record formats. There is also no indication of configuration or mechanisms ensuring the completeness, accuracy, or protection of these audit records.",
       "configuration": ""
     },
     {
@@ -231,7 +228,7 @@
       "control-name": "System-wide and Time-correlated Audit Trail",
       "description": "Compile audit records from {{ insert: param, au-12.01_odp.01 }} into a system-wide (logical or physical) audit trail that is time-correlated to within {{ insert: param, au-12.01_odp.02 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests but does not aggregate these logs into a system-wide or centralized audit trail. Additionally, there are no mechanisms to time-correlate audit records across components to ensure a consistent and synchronized audit trail. There is also a lack of log integrity protections, structured log format for security auditing, and no defined log retention or monitoring policies. Therefore, the control is applicable to the system but represents a significant gap in implementation.",
+      "explanation": "The TinyHTTP service implements basic logging that captures connection attempts and HTTP requests, but the logs lack integrity controls, do not aggregate audit records into a system-wide audit trail, and there is no evidence of time-correlation or consistent timestamping across different components. There are no configurations or mechanisms to compile audit records into a centralized, time-correlated audit trail as required by the control. This represents a significant gap in audit trail management for the system.",
       "configuration": ""
     },
     {
@@ -239,14 +236,15 @@
       "control-name": "System Start-up",
       "description": "Initiate session audits automatically at system start-up.",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks session management entirely, including any form of audit session tracking or logging sessions initiation at system start-up. While basic logging captures some connection attempts and HTTP requests, there is no evidence of audit sessions being initiated automatically upon system start-up or any comprehensive auditing mechanism integrated with service initialization."
+      "explanation": "The TinyHTTP service does not implement session handling or audit logging mechanisms that are initiated at system start-up. Although basic logging exists for connection attempts and HTTP requests, there is no indication that session audits are automatically started when the system boots or restarts. There is also no configuration or code evidence that supports automated initiation of audit sessions on start-up, creating a gap in satisfying this control.",
+      "configuration": ""
     },
     {
       "control-id": "au-3smt.a",
       "control-name": "Content of Audit Records",
       "description": "What type of event occurred;",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests but does not explicitly log detailed event types necessary for full audit records. The logs lack comprehensive event classification, data integrity assurance, and sensitivity filtering, which creates a gap in satisfying this audit control requirement.",
+      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests but does not explicitly record the specific type of events that occurred in detail. The audit logs lack structured information identifying what event took place, which is necessary to satisfy the control requirements. Additionally, there is no evidence of filtering or enriching audit records to indicate event types, nor is there configuration to enforce this. Therefore, this represents a gap in compliance with the control.",
       "configuration": ""
     },
     {
@@ -254,22 +252,21 @@
       "control-name": "Content of Audit Records",
       "description": "When the event occurred;",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging capturing connection attempts and HTTP requests. The logs do not explicitly include timestamps or information indicating when the events occurred. Without timestamps or equivalent temporal markers in the audit records, the control requirement to capture 'when the event occurred' is not satisfied, representing a significant gap in audit record content.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service implements basic logging that captures connection attempts and HTTP requests; however, the audit logs do not explicitly include timestamps or accurate event occurrence times as part of the log entries. There is no evidence in configuration or code that the logs reliably record when each event occurred, resulting in a gap for this control requirement."
     },
     {
       "control-id": "au-3smt.c",
       "control-name": "Content of Audit Records",
       "description": "Where the event occurred;",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging of connection attempts and HTTP requests without capturing detailed contextual information about where the event occurred. The logs do not include source IP addresses, server components involved, or specific locations within the system that generated the event. This represents a gap with respect to the control requiring audit records to indicate where the event occurred."
+      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests, but it does not include the location or source context of where the events occurred (such as IP addresses, source ports, or server module handling the event). There is no evidence of configuration or code capturing this critical audit information. Therefore, the control is applicable but not satisfied, representing a gap in the audit record content."
     },
     {
       "control-id": "au-3smt.d",
       "control-name": "Content of Audit Records",
       "description": "Source of the event;",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests, but there is no evidence that audit records include the source of the event (e.g., IP address, user identity, or component initiating the event). Additionally, there are no configurations or code references indicating that source information is recorded in audit logs. This represents a gap in meeting the AU-3smt.d control requirement.",
+      "explanation": "The TinyHTTP service implements only basic logging capturing connection attempts and HTTP requests, but the logs do not explicitly include the source of the event, such as the originating user, process, or IP address in a structured or guaranteed manner. There is no evidence in the provided context that the service accurately records or configures audit records to include the 'source of the event' as required. Additionally, there are no log formats or configurations that specify capturing source information, nor are there mechanisms to ensure the audit log completeness or integrity regarding source data.",
       "configuration": ""
     },
     {
@@ -277,7 +274,7 @@
       "control-name": "Content of Audit Records",
       "description": "Outcome of the event; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements basic audit logging that captures connection attempts and HTTP requests. However, the logs do not explicitly include the outcome of the event (e.g., success or failure status), which is a critical component of this control to determine the result of audited events. Since this outcome detail is missing, the control is currently not satisfied and represents a gap in the audit record content.",
+      "explanation": "The TinyHTTP service implements basic logging that captures connection attempts and HTTP requests but does not explicitly record the outcome of events in audit records. There is a lack of structured audit logging that ensures capturing of event outcomes (e.g., success or failure status). Additionally, no configuration or code details indicate that audit records include event outcomes as required by this control, representing a clear gap in audit content completeness.",
       "configuration": ""
     },
     {
@@ -285,7 +282,7 @@
       "control-name": "Content of Audit Records",
       "description": "Identity of any individuals, subjects, or objects/entities associated with the event.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements basic logging of connection attempts and HTTP requests, but does not include any form of authentication or identity management. Consequently, audit logs cannot capture the identity of any individuals or subjects associated with events, resulting in a gap for this control. Without user identities or session tracking, audit records lack key information required by the control.",
+      "explanation": "The TinyHTTP service implements only very basic logging that captures connection attempts and HTTP request metadata, but it does not implement any authentication or identity management. As a result, audit records do not contain any identity information related to individuals, subjects, or entities associated with the logged events. There is no mechanism to identify or track users, clients, or processes generating the events, leaving the control unfulfilled.",
       "configuration": ""
     },
     {
@@ -293,7 +290,7 @@
       "control-name": "Additional Audit Information",
       "description": "Generate audit records containing the following additional information: {{ insert: param, au-03.01_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only very basic logging of connection attempts and HTTP requests but does not generate audit records containing additional required information as specified by the control (e.g., detailed user activity, timestamping, system state data). There is no indication that audit records include enriched security-relevant context or structured audit data. Furthermore, no log integrity controls or detailed audit metadata are implemented. This represents a gap in meeting the control requirements.",
+      "explanation": "The service implements only basic logging that captures connection attempts and HTTP requests, but it does not generate audit records containing the additional required information as specified by the control. There is no indication of structured or enriched audit logs that include parameters such as user identity, event context, or system state details. Furthermore, log integrity, retention policies, and sensitivity filtering are not addressed, leading to a gap in compliance with this control.",
       "configuration": ""
     },
     {
@@ -301,14 +298,15 @@
       "control-name": "Transfer to Alternate Storage",
       "description": "Transfer audit logs {{ insert: param, au-04.01_odp }} to a different system, system component, or media other than the system or system component conducting the logging.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements basic logging that captures connection attempts and HTTP requests; however, there is no mechanism or configuration documented or implemented to transfer or offload these audit logs to an alternate storage system, different system component, or media separate from the system conducting the logging. This presents a gap in meeting the control requirements since audit logs remain solely on the local system where they are generated without any secure transfer or backup to alternate storage."
+      "explanation": "The TinyHTTP service implements basic logging that captures connection attempts and HTTP requests locally. However, there is no implementation or configuration to transfer audit logs to a different system, system component, or media. Logs remain on the same system performing the logging with no alternate storage or forwarding mechanism. This poses a potential security risk as audit logs are not protected against local compromise or loss.",
+      "configuration": ""
     },
     {
       "control-id": "au-5smt.a",
       "control-name": "Response to Audit Logging Process Failures",
       "description": "Alert {{ insert: param, au-05_odp.01 }} within {{ insert: param, au-05_odp.02 }} in the event of an audit logging process failure; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests, but does not include any mechanisms to detect or alert on audit logging process failures. There is no configuration or code evidence of alerting systems or failure response mechanisms in place. Without alerts or monitoring on audit logging failures, this control is not met.",
+      "explanation": "The TinyHTTP service implements only basic logging capturing connection attempts and HTTP requests, but it does not include any mechanism to detect audit logging process failures or generate alerts in such events. There is no configuration or code for monitoring audit logging health or alerting responsible personnel/system within any timeframe. Therefore, there is a gap in meeting this control requirement.",
       "configuration": ""
     },
     {
@@ -316,7 +314,7 @@
       "control-name": "Response to Audit Logging Process Failures",
       "description": "Take the following additional actions: {{ insert: param, au-05_odp.03 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests without ensuring log integrity, alerting, or automated response to audit logging process failures. There is no configuration or mechanism present to detect, alert, or respond to failures in the audit logging process, such as log write failures, system resource limitations affecting logging, or other process failures. Thus, the control is applicable but represents a gap given the lack of monitoring, alerting, or automated handling related to audit logging process failures.",
+      "explanation": "The TinyHTTP service implements basic logging that captures connection attempts and HTTP requests. However, it does not have any mechanisms in place to detect or respond to audit logging process failures. There are no alerting, fallback, or failover actions configured to ensure audit logging continuity or integrity in the event of failures. Thus, the control to respond appropriately to audit logging process failures is not satisfied.",
       "configuration": ""
     },
     {
@@ -324,14 +322,14 @@
       "control-name": "Central Review and Analysis",
       "description": "Provide and implement the capability to centrally review and analyze audit records from multiple components within the system.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging limited to connection attempts and HTTP requests but lacks any capability to centrally collect, review, or analyze audit records across its components. There are no monitoring systems, centralized log aggregation, or analysis tools configured or implemented. This represents a significant gap in meeting the control requirements for centralized audit review and analysis."
+      "explanation": "The TinyHTTP service implements only basic logging of connection attempts and HTTP requests locally, without any mechanism to centrally collect, review, or analyze audit records across multiple components. The service lacks monitoring systems, alert mechanisms, and structured log management necessary to fulfill this control. No configuration or implementation exists to aggregate or correlate logs from the asynchronous server, threaded server, and TCP echo server components."
     },
     {
       "control-id": "au-7smt.a",
       "control-name": "Audit Record Reduction and Report Generation",
       "description": "Supports on-demand audit record review, analysis, and reporting requirements and after-the-fact investigations of incidents; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging of connection attempts and HTTP requests without structured audit logging, log reduction capabilities, or report generation. There are no defined mechanisms for on-demand audit record review, analysis, or generating reports to support investigations or compliance requirements. Additionally, no log retention or integrity protection measures are implemented, resulting in a gap in fulfilling the control's requirements.",
+      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests. However, it lacks structured audit record review capabilities, analysis, reporting functions, and mechanisms to support after-the-fact investigations of incidents. There is no evidence of log reduction, aggregation, or on-demand report generation tooling. Additionally, no integrity protection or sensitivity filtering of audit logs is present, and no log retention or monitoring policies exist. These missing features represent a significant gap in satisfying the requirements of control au-7smt.a.",
       "configuration": ""
     },
     {
@@ -339,60 +337,60 @@
       "control-name": "Audit Record Reduction and Report Generation",
       "description": "Does not alter the original content or time ordering of audit records.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging for connection attempts and HTTP requests. There is no evidence of mechanisms ensuring preservation of the original content or time ordering of audit records during audit record reduction or report generation. Moreover, there are no configurations or processes in place to guarantee that audit records remain unaltered, which leaves this control unaddressed.",
+      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests but does not ensure the integrity or preservation of the original content or time ordering of audit records. There is no indication that audit record reduction or report generation processes are implemented in a manner that avoids altering original audit data or its chronological order. Additionally, there is no configuration or system mechanism enforcing this requirement, representing a clear gap in compliance with the control.",
       "configuration": ""
     },
     {
       "control-id": "au-8smt.a",
       "control-name": "Time Stamps",
-      "description": "Use internal system clocks to generate time stamps for audit records;",
+      "description": "Use internal system clocks to generate time stamps for audit records; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements basic logging that captures connection attempts and HTTP requests. However, the service documentation and available information do not indicate that audit records use internal system clocks for generating time stamps. There is no evidence of synchronized, internal-system-based time-stamping mechanisms for audit logs. This represents a gap as accurate and trustworthy time stamps are critical for audit record integrity and forensic analysis."
+      "explanation": "The TinyHTTP service implements basic logging capturing connection attempts and HTTP requests, but there is no indication that these logs use time stamps generated from internal system clocks. Furthermore, the logs do not ensure data integrity or detailed audit record structures. There is no configuration or code evidence demonstrating the use of verified internal system clocks for time stamping audit logs, representing a gap in compliance with this control.",
+      "configuration": "No relevant configuration files (json or yaml) or settings have been found to support the use of internal system clocks for time stamps in audit records."
     },
     {
       "control-id": "au-8smt.b",
       "control-name": "Time Stamps",
       "description": "Record time stamps for audit records that meet {{ insert: param, au-08_odp }} and that use Coordinated Universal Time, have a fixed local time offset from Coordinated Universal Time, or that include the local time offset as part of the time stamp.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements basic logging capturing connection attempts and HTTP requests, but there is no evidence that the audit records include time stamps formatted with Coordinated Universal Time (UTC), a fixed local time offset, or include the local time offset as part of the time stamp. Furthermore, audit logging lacks structure and security hardening, indicating that time stamp controls have not been enforced, resulting in a compliance gap.",
-      "configuration": ""
+      "explanation": "The service implements basic logging capturing connection attempts and HTTP requests, but does not ensure that time stamps in audit records use Coordinated Universal Time (UTC), include a fixed local time offset, or represent time zone information. Audit logging lacks details on time stamp formats, time zone specification, and synchronization to a reliable time source, resulting in a gap in compliance with this control."
     },
     {
       "control-id": "au-9smt.a",
       "control-name": "Protection of Audit Information",
-      "description": "Protect audit information and audit logging tools from unauthorized access, modification, and deletion; and",
+      "description": "Protect audit information and audit logging tools from unauthorized access, modification, and deletion;",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests without any mechanisms to protect audit information from unauthorized access, modification, or deletion. There are no access controls, encryption, integrity checks, or retention policies applied to the audit logs or logging tools. Therefore, the control is not satisfied, representing a significant security gap.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service implements only basic logging that captures connection attempts and HTTP requests; however, there are no mechanisms to protect audit logs from unauthorized access, modification, or deletion. There is no access control, encryption, integrity verification, or secure storage applied to log files, and no tools to restrict or monitor access to audit information are in place.",
+      "configuration": "Not applicable as no configuration exists to protect audit information or logging tools."
     },
     {
       "control-id": "au-9smt.b",
       "control-name": "Protection of Audit Information",
       "description": "Alert {{ insert: param, au-09_odp }} upon detection of unauthorized access, modification, or deletion of audit information.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements only basic logging of connection attempts and HTTP requests without ensuring the integrity or protection of audit logs. There are no alert mechanisms configured or implemented to detect and notify unauthorized access, modification, or deletion of audit information. The service lacks monitoring systems and defined processes to safeguard audit information, representing a control gap in protecting audit data and alerting upon suspicious activity.",
-      "configuration": "No relevant configuration files exist that provide for protection, monitoring, or alerting of audit logs. No JSON or YAML configuration governs audit log protection or alert settings."
+      "explanation": "The TinyHTTP service implements only basic logging mechanisms that capture connection attempts and HTTP requests but lacks controls to ensure the integrity and protection of audit information. There are no mechanisms for detecting unauthorized access, modification, or deletion of audit logs, nor is there any alerting configured to notify personnel of such events. Additionally, there are no monitoring or alert systems in place to fulfill the requirements of this control.",
+      "configuration": ""
     },
     {
       "control-id": "au-9.2",
       "control-name": "Store on Separate Physical Systems or Components",
       "description": "Store audit records {{ insert: param, au-09.02_odp }} in a repository that is part of a physically different system or system component than the system or component being audited.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements basic logging capturing connection attempts and HTTP requests but does not specify or configure audit log storage on a physically separate system or component. There is no evidence from the provided context of logs being transferred, stored, or managed on a distinct physical server or storage system separate from the TinyHTTP service itself. This represents a gap in meeting AU-9.2, as audit records are not isolated from the system generating them, increasing risk of tampering or loss in the event of compromise."
+      "explanation": "The TinyHTTP service currently implements only basic logging of connection attempts and HTTP requests locally without any indication that audit logs are stored on a separate physical system or system component. There is no configuration or implementation detail that supports the segregation of audit logs to physically distinct systems. This presents a gap in satisfying the control requirement for physically separating audit record storage from the audited system."
     },
     {
       "control-id": "au-9.3",
       "control-name": "Cryptographic Protection",
       "description": "Implement cryptographic mechanisms to protect the integrity of audit information and audit tools.",
       "status": "gap",
-      "explanation": "Although basic logging is implemented, there are no cryptographic mechanisms in place to protect the integrity of audit logs or audit tools. Logs are generated without any form of cryptographic signing, hashing, or encryption, making them vulnerable to tampering and unauthorized modification. Additionally, there is no configuration or implementation for key management or cryptographic protection to ensure audit integrity."
+      "explanation": "The TinyHTTP service implements basic logging of connection attempts and HTTP requests, but the audit logs are not protected with any cryptographic mechanisms. There is no encryption of logs, no digital signing, nor integrity checking to ensure that audit information and audit tools have not been tampered with. Additionally, there is no key management or cryptographic infrastructure present. Therefore, the service does not meet the control requirement to implement cryptographic mechanisms to protect audit integrity."
     },
     {
       "control-id": "cm-11.2",
       "control-name": "Software Installation with Privileged Status",
       "description": "Allow user installation of software only with explicit privileged status.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implementation and accompanying documentation do not indicate any controls to restrict software installation to privileged users. There is no authentication, authorization, or privilege separation enforced, allowing users to potentially install or modify software without explicit privileged status. No configuration files or security policies related to software installation permissions are present or referenced.",
+      "explanation": "The TinyHTTP service and its deployment context do not document or enforce any restrictions on software installation. There are no mechanisms, configurations, or policies described that require explicit privileged status for software installation. The system lacks authentication and authorization controls, which means there is no control over who can install software, thus representing a clear gap in enforcing this security control.",
       "configuration": ""
     },
     {
@@ -400,7 +398,7 @@
       "control-name": "Signed Components",
       "description": "Prevent the installation of {{ insert: param, cm-14_prm_1 }} without verification that the component has been digitally signed using a certificate that is recognized and approved by the organization.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanism to verify that components or software are digitally signed before installation. There is no mention of digital signature verification processes, package validation, or use of certificates in the service's architecture or configuration. This represents a significant gap in ensuring the integrity and authenticity of components being installed.",
+      "explanation": "The TinyHTTP service does not implement any mechanism to verify that components or software updates are digitally signed. There is no configuration, code, or process described that enforces installation restrictions based on cryptographic signature verification using approved certificates. This leaves the service vulnerable to the installation of potentially malicious components, violating the control requirements.",
       "configuration": ""
     },
     {
@@ -408,14 +406,15 @@
       "control-name": "Access Restrictions for Change",
       "description": "Define, document, approve, and enforce physical and logical access restrictions associated with changes to the system.",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any implemented authentication or authorization mechanisms, meaning there are no logical access restrictions controlling who can make changes to the system. There is also no documentation or enforcement of physical or logical access restrictions related to system changes. As such, there are significant gaps in enforcing access restrictions for changes to the system."
+      "explanation": "The TinyHTTP service does not implement any authentication, authorization, or access control mechanisms to restrict or control changes to the system. There is no documented or enforced process for defining, approving, or enforcing physical or logical access restrictions for system changes, representing a significant gap with respect to the CM-5 control requirements.",
+      "configuration": ""
     },
     {
       "control-id": "cm-5.1smt.a",
       "control-name": "Automated Access Enforcement and Audit Records",
       "description": "Enforce access restrictions using {{ insert: param, cm-05.01_odp }} ; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any automated access enforcement mechanisms or audit record capabilities. There is no authentication, authorization, access control, identity management, or session handling implemented, leaving the service open to unauthorized access. Additionally, audit logging is minimal and lacks mechanisms to ensure data integrity and sensitivity filtering. Therefore, the control is applicable but currently represents a gap.",
+      "explanation": "The TinyHTTP service does not implement any access control mechanisms, including authentication, authorization, or session management. There are no automated access enforcement controls in place to restrict or manage access to the service. Additionally, while basic logging exists, it does not provide sufficient audit capabilities for tracking access attempts or enforcing access policies. Therefore, this control is applicable but currently represents a gap in the service's security posture.",
       "configuration": ""
     },
     {
@@ -423,21 +422,22 @@
       "control-name": "Automated Access Enforcement and Audit Records",
       "description": "Automatically generate audit records of the enforcement actions.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any access control or enforcement mechanisms. As a result, there are no automated audit records generated for enforcement actions since these actions do not occur. While basic logging exists for connection attempts and HTTP requests, these logs do not specifically capture or ensure integrity of enforcement actions, creating a gap in satisfying this control."
+      "explanation": "The TinyHTTP service does not implement any access control mechanisms, authentication, or authorization policies. Consequently, no enforcement actions are performed or recorded. While basic logging exists for connection attempts and HTTP requests, these logs do not specifically capture access enforcement actions or related audit records. Therefore, the control is applicable but currently represents a gap in the system's implementation.",
+      "configuration": ""
     },
     {
       "control-id": "cm-5.3",
       "control-name": "Signed Components",
       "description": "CM-05(03)",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanisms to ensure that software components are cryptographically signed or verified prior to installation or execution. There is no configuration, code, or documentation indicating that components are signed or that signature verification is enforced. This represents a significant gap in the control, as unsigned or tampered components could be introduced into the system without detection."
+      "explanation": "The TinyHTTP service does not implement any mechanism to verify the authenticity or integrity of its components via digital signatures. There is no evidence in the codebase, configuration, or setup files indicating that software components, binaries, or modules are signed or verified prior to execution or deployment. This lack of signed components introduces a supply chain risk where unauthorized or tampered components could be introduced without detection."
     },
     {
       "control-id": "cm-5.6",
       "control-name": "Limit Library Privileges",
       "description": "Limit privileges to change software resident within software libraries.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of access control, authentication, or authorization mechanisms. There is no indication of privileged or restricted access to software libraries or components used by the service. Without implemented controls to limit who can modify software resident within libraries, this represents a clear security gap.",
+      "explanation": "The TinyHTTP service lacks any implemented authorization or access control mechanisms. There are no privilege restrictions limiting who can change software in the code or library directories. This represents a significant security gap as any user with file system access could potentially modify the software libraries without constraint, violating the control requirement.",
       "configuration": ""
     },
     {
@@ -445,7 +445,7 @@
       "control-name": "Configuration Settings",
       "description": "Establish and document configuration settings for components employed within the system that reflect the most restrictive mode consistent with operational requirements using {{ insert: param, cm-06_odp.01 }};",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks established and documented configuration settings that enforce restrictive modes consistent with operational requirements. There are no secure configuration files (such as JSON or YAML) defining security-related parameters. Critical configuration aspects like access controls, authentication, encryption protocols, or logging settings are missing or undocumented, resulting in a failure to meet the control requirements.",
+      "explanation": "The TinyHTTP service lacks documented or implemented configuration settings that enforce a restrictive security posture consistent with operational needs. The analysis shows no secure default configurations, no access control settings, no encryption configurations (like TLS), and no documented configuration reflecting restrictive modes. Therefore, the control is applicable but currently not met, representing a significant security gap.",
       "configuration": ""
     },
     {
@@ -453,30 +453,28 @@
       "control-name": "Configuration Settings",
       "description": "Implement the configuration settings;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any configuration settings to enforce security controls or harden the system. There are no configuration files (json or yaml) provided that configure security parameters such as encryption, access control, or logging settings. This represents a significant security gap, as secure configuration management is absent from the service implementation."
+      "explanation": "The TinyHTTP service does not implement any configuration settings related to security controls. There is no configuration file (JSON or YAML) detailing secure settings, such as enabling TLS, authentication enforcement, logging configurations, or other security-relevant parameters. Without these configurations, the control is not satisfied. The absence of documented or implemented configuration settings represents a significant security gap."
     },
     {
       "control-id": "cm-6smt.c",
       "control-name": "Configuration Settings",
       "description": "Identify, document, and approve any deviations from established configuration settings for {{ insert: param, cm-06_odp.02 }} based on {{ insert: param, cm-06_odp.03 }} ; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks documented configuration management practices to identify, document, and approve deviations from established configuration settings. There is no evidence of configuration files or automated controls that enforce baseline configurations. The system does not demonstrate any process or tooling that governs configuration changes or deviations based on policy or risk considerations, which represents a significant gap.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service lacks documented and enforced configuration settings related to security controls. There is no evidence of identifying, documenting, or approving deviations from configuration baselines, nor standardized configuration files that define or enforce such settings. The service has no secure configuration management processes, including absence of secure TLS settings or access control configuration. This represents a clear gap in compliance with the configuration management control cm-6smt.c."
     },
     {
       "control-id": "cm-6smt.d",
       "control-name": "Configuration Settings",
       "description": "Monitor and control changes to the configuration settings in accordance with organizational policies and procedures.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanisms or processes to monitor or control changes to its configuration settings. The service lacks authentication, access controls, and audit monitoring, which are essential to managing configuration changes securely. There is no evidence of configuration management files (such as JSON or YAML configuration files) with version control or change monitoring. Without these controls, there is a significant gap in ensuring that changes to configuration settings are audited, authorized, and controlled in line with organizational policies.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any mechanisms to monitor or control changes to its configuration settings. There are no configuration management tools, version control integration, or automated change tracking implemented. Additionally, there are no organizational policies or automated procedures enforced to ensure such monitoring or control. This represents a significant gap in ensuring the integrity and security of configuration settings."
     },
     {
       "control-id": "cm-7smt.a",
       "control-name": "Least Functionality",
       "description": "Configure the system to provide only {{ insert: param, cm-07_odp.01 }} ; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service currently does not implement any restrictions on system functionality or limit services to only essential capabilities. It exposes an asynchronous HTTP server, a multi-threaded HTTP server, and a TCP echo server simultaneously without configuration or controls to disable unnecessary functions. This broad functionality increases the attack surface, violating the principle of least functionality. There is no mechanism or configuration documented that restricts or disables unused services or features to minimize risk.",
+      "explanation": "The TinyHTTP service exposes multiple server components (async HTTP server, multi-threaded HTTP server, and TCP echo server) all active by default, without any implemented access controls or restrictions to limit functionality. There are no configurations or controls restricting the system to only the minimal required functions necessary for its operation. The absence of authentication, authorization, and explicit disabling of non-essential features indicates that least functionality is not enforced. This leaves the service with surplus and potentially unsafe functionality enabled, representing a security gap.",
       "configuration": ""
     },
     {
@@ -484,31 +482,28 @@
       "control-name": "Least Functionality",
       "description": "Prohibit or restrict the use of the following functions, ports, protocols, software, and/or services: {{ insert: param, cm-7_prm_2 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any restrictions or prohibitions regarding functions, ports, protocols, software, or services. It exposes basic HTTP and TCP echo services without any mechanisms to limit or restrict unnecessary functionality, ports, or protocols. This lack of least functionality control leads to potential exposure to unnecessary or risky services that increase the attack surface.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any restrictions or prohibitions on unused or insecure functions, ports, protocols, software, or services. There is no evidence of secure configuration or disabling of unnecessary network services (such as unused ports or protocols). Additionally, the service lacks authentication, authorization, encryption, and secure session management, which increases the attack surface. No configuration files were found that restrict or disable extraneous functions or network capabilities. This represents a clear gap in implementing the Least Functionality security control."
     },
     {
       "control-id": "cm-7.2",
       "control-name": "Prevent Program Execution",
       "description": "Prevent program execution in accordance with {{ insert: param, cm-07.02_odp.01 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanisms to prevent unauthorized or unintended program execution. There are no configurations, policies, or controls in place within the service or its deployment architecture that restrict or prevent program execution according to the referenced parameter. The service lacks authentication, authorization, and access control measures, which further exacerbates the risk of unauthorized program execution. Additionally, since no secure configuration or access control to the runtime environment is documented or implemented, this represents a significant gap in satisfying the control requirements.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any measures to prevent unauthorized or unintended program execution. There are no controls in place to restrict which programs can run or mechanisms to enforce such restrictions. Given the environment is a Python-based service handling incoming requests with multi-threaded and asynchronous servers, program execution control is relevant to avoid exploitation or execution of arbitrary code. The absence of any documented or configured controls addressing program execution prevention represents a gap."
     },
     {
       "control-id": "cm-7.5smt.a",
       "control-name": "Authorized Software \u2014 Allow-by-exception",
       "description": "Identify {{ insert: param, cm-07.05_odp.01 }};",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanisms to identify or enforce authorized software. There is no allow-by-exception policy or configuration present to restrict software execution to only approved applications. The absence of authentication, authorization, and access control further indicates a lack of software authorization controls. This represents a clear gap in compliance with control cm-7.5smt.a.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any mechanisms to identify or manage authorized software on the system. There are no allow-by-exception policies or controls enforced to restrict software execution on the platform. This represents a significant gap in enforcing software authorization controls as required by the control."
     },
     {
       "control-id": "cm-7.5smt.b",
       "control-name": "Authorized Software \u2014 Allow-by-exception",
-      "description": "Employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs on the system;",
+      "description": "Employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs on the system; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service and its underlying system do not implement a deny-all, permit-by-exception policy for authorized software execution. There is no evidence of software whitelisting or application control mechanisms to restrict the execution of unauthorized binaries or scripts. This represents a significant gap in controlling the execution environment and increases the risk of unauthorized or malicious software running on the system.",
+      "explanation": "The TinyHTTP service does not implement any form of software execution control such as a deny-all, permit-by-exception policy. There is no indication of authorization policies restricting software execution to authorized programs only. This represents a gap in compliance with the control, as any unauthorized or malicious software could potentially be executed on the system without restriction.",
       "configuration": ""
     },
     {
@@ -516,29 +511,31 @@
       "control-name": "Authorized Software \u2014 Allow-by-exception",
       "description": "Review and update the list of authorized software programs {{ insert: param, cm-07.05_odp.02 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanism to maintain, review, or update a list of authorized software programs. There is no configuration, policy, or process found within the service codebase or configurations that enforces allow-by-exception for software execution. This represents a gap in compliance with the control CM-7.5smt.c, as unauthorized or unvetted software could be run without restrictions."
+      "explanation": "The TinyHTTP service does not implement any software authorization controls or mechanisms to allow software execution by exception. There is no documented or configured list of authorized software programs, nor is there any indication of procedures or configuration files that enforce or review authorized software. This represents a gap in compliance with the control requiring review and update of the list of authorized software.",
+      "configuration": "No configuration files or settings related to authorized software lists have been identified or provided."
     },
     {
       "control-id": "ia-11",
       "control-name": "Re-authentication",
       "description": "Require users to re-authenticate when {{ insert: param, ia-11_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including session management or re-authentication processes. Consequently, there is no capability to require users to re-authenticate under any conditions, representing a gap relative to the re-authentication control requirements.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or session handling. Because no user authentication exists, the control requiring users to re-authenticate under specified conditions cannot be satisfied. This represents a clear security gap as re-authentication is not supported or enforced.",
+      "configuration": "N/A"
     },
     {
       "control-id": "ia-2",
       "control-name": "Identification and Authentication (Organizational Users)",
       "description": "Uniquely identify and authenticate organizational users and associate that unique identification with processes acting on behalf of those users.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms to uniquely identify and authenticate organizational users. There is no identity management system, no user credential handling, and no session management present. Consequently, organizational users are not uniquely identified or authenticated, representing a significant security gap."
+      "explanation": "The TinyHTTP service currently does not implement any identification or authentication mechanisms for organizational users. There is no identity management system, no user credentials handling, and no access control implemented. Therefore, the service cannot uniquely identify or authenticate users or associate their identities with any processes, resulting in a significant security gap relative to this control.",
+      "configuration": ""
     },
     {
       "control-id": "ia-2.1",
       "control-name": "Multi-factor Authentication to Privileged Accounts",
       "description": "Implement multi-factor authentication for access to privileged accounts.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including multi-factor authentication, for any accounts or access points. There is no identity management or access control system in place, leaving privileged accounts unprotected and accessible without any multi-factor authentication. This represents a significant gap in security controls as per the requirements of ia-2.1.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including multi-factor authentication (MFA). There is no identity management, authorization, or session handling. Therefore, no MFA is enforced for access to privileged accounts or any accounts within the system, representing a critical security gap.",
       "configuration": ""
     },
     {
@@ -546,28 +543,31 @@
       "control-name": "Multi-factor Authentication to Non-privileged Accounts",
       "description": "Implement multi-factor authentication for access to non-privileged accounts.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management systems. Consequently, there is no support for multi-factor authentication (MFA) for non-privileged accounts or any accounts. This represents a significant security gap as all accesses are unauthenticated and thus not protected by MFA or any other control."
+      "explanation": "The TinyHTTP service lacks any implemented authentication mechanisms, including multi-factor authentication (MFA). There is no identity management system or session handling in place, which means non-privileged accounts cannot be secured via MFA. The absence of access control or user authentication represents a security gap that directly impacts compliance with this control.",
+      "configuration": ""
     },
     {
       "control-id": "ia-2.3",
       "control-name": "Local Access to Privileged Accounts",
       "description": "IA-02(03)",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any form of authentication, identity management, or access control mechanisms. There are no privileged accounts managed locally or remotely, nor any controls to restrict local access to such accounts. This represents a direct gap against the IA-02(03) control requirement, as there is no assurance that local access to privileged accounts is properly restricted or controlled."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, authorization models, or identity management, which includes no controls over local access to privileged accounts. There is no session handling or access control to restrict local privileged account access, representing a clear security gap in satisfying IA-02(03).",
+      "configuration": ""
     },
     {
       "control-id": "ia-2.4",
       "control-name": "Local Access to Non-privileged Accounts",
       "description": "IA-02(04)",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of authentication or identity management, including local access controls to non-privileged accounts. There is no evidence of configuration or implementation that restricts or manages local access for non-privileged users, representing a clear gap in satisfying this control."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or access control measures, including for local or non-privileged accounts. There is no configuration or intrinsic design that restricts or controls local access to non-privileged accounts, representing a significant security gap with respect to this control.",
+      "configuration": ""
     },
     {
       "control-id": "ia-2.5",
       "control-name": "Individual Authentication with Group Authentication",
       "description": "When shared accounts or authenticators are employed, require users to be individually authenticated before granting access to the shared accounts or resources.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including individual authentication prior to accessing shared accounts or resources. There is no identity management, session management, or access control in place. As a result, the control requiring users to be individually authenticated before granting access to shared accounts is not satisfied, representing a clear security gap.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including individual or group authentication. There is no identity management or access control system in place to require individual authentication before granting access to shared accounts or resources. This represents a clear gap against control ia-2.5 requirements.",
       "configuration": ""
     },
     {
@@ -575,7 +575,7 @@
       "control-name": "Access to Accounts \u2014 Replay Resistant",
       "description": "Implement replay-resistant authentication mechanisms for access to {{ insert: param, ia-02.08_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including replay-resistant authentication. There are no identity management or session handling features, and access control measures are absent. Therefore, replay-resistant authentication, which prevents attackers from reusing captured authentication tokens or credentials, is not addressed in this service.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management systems. Since no authentication is in place, there are no replay-resistant authentication mechanisms to mitigate replay attacks. This represents a significant security gap as the service allows access without any form of replay-resistant authentication.",
       "configuration": ""
     },
     {
@@ -583,15 +583,14 @@
       "control-name": "Network Access to Non-privileged Accounts \u2014 Replay Resistant",
       "description": "IA-02(09)",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any authentication mechanism altogether, including replay-resistant methods for network access to non-privileged accounts. Without authentication or session handling, there is no replay resistance implemented for network access. This represents a significant security gap as the control requires ensuring that network access for non-privileged accounts is replay resistant, which is not addressed by the current service implementation.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms for network access, including for non-privileged accounts. Without authentication, no replay-resistant mechanisms (such as nonce-based authentication, challenge-response protocols, or time-based tokens) are in place to protect against replay attacks during network access. This represents a significant security gap for this control."
     },
     {
       "control-id": "ia-3.1",
       "control-name": "Cryptographic Bidirectional Authentication",
       "description": "Authenticate {{ insert: param, ia-03.01_odp.01 }} before establishing {{ insert: param, ia-03.01_odp.02 }} connection using bidirectional authentication that is cryptographically based.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including cryptographic bidirectional authentication. There is no identity management, no session handling, and no support for encrypted or authenticated connections. As a result, the control is applicable but represents a clear security gap that needs to be addressed by implementing cryptographically based bidirectional authentication before establishing connections.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including cryptographic bidirectional authentication. There is no support for authenticating the client or server before establishing connections, and data is transmitted without encryption. This represents a clear gap in meeting the requirement for cryptographically based bidirectional authentication before connection establishment.",
       "configuration": ""
     },
     {
@@ -599,90 +598,90 @@
       "control-name": "Identifier Management",
       "description": "Receiving authorization from {{ insert: param, ia-04_odp.01 }} to assign an individual, group, role, service, or device identifier;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any identity management system, and there is no mechanism for authorization to assign identifiers to individuals, groups, roles, services, or devices. The service lacks authentication, authorization, and identity management controls altogether, resulting in a gap with respect to this security control.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any identity management system or authorization mechanisms, including no process for receiving or verifying authorization before assigning identifiers to individuals, groups, roles, services, or devices. There is a complete absence of identifier management policies or configurations.",
+      "configuration": "No configuration files or settings exist in the codebase or service setup to manage or authorize the assignment of identifiers."
     },
     {
       "control-id": "ia-4smt.b",
       "control-name": "Identifier Management",
       "description": "Selecting an identifier that identifies an individual, group, role, service, or device;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of identity management or identifier selection. There are no authentication mechanisms or identity constructs in place to assign or manage identifiers for individuals, groups, roles, services, or devices. This represents a significant gap in meeting the Identifier Management control requirements."
+      "explanation": "The TinyHTTP service does not implement any form of identity management or identifier selection for individuals, groups, roles, services, or devices. There is no authentication mechanism or identity management system in place to assign or manage identifiers, representing a clear and significant gap in compliance with this control.",
+      "configuration": ""
     },
     {
       "control-id": "ia-4smt.c",
       "control-name": "Identifier Management",
       "description": "Assigning the identifier to the intended individual, group, role, service, or device;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any identity management system. There are no mechanisms to assign or manage identifiers for users, groups, roles, services, or devices. Authentication and authorization are absent, and no configuration files exist to support identifier assignment or management. This represents a gap in satisfying the IA-4 control requirements."
+      "explanation": "The TinyHTTP service does not implement any form of identity or identifier management. There are no mechanisms for assigning identifiers to individuals, groups, roles, services, or devices. No authentication or authorization subsystems exist within the service to manage or track identities. Therefore, the control is applicable but currently represents a significant gap in the system's security posture.",
+      "configuration": ""
     },
     {
       "control-id": "ia-4smt.d",
       "control-name": "Identifier Management",
       "description": "Preventing reuse of identifiers for {{ insert: param, ia-04_odp.02 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any identity management system or mechanisms for handling user identities. There is no process to prevent reuse of identifiers, as user identifiers or session identifiers are not managed at all. This represents a significant control gap in terms of ensuring unique and non-reused identifiers.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any identity management system, user authentication, or identifier allocation/management features. Since there is no management or issuance of user or system identifiers, the service neither generates nor prevents reuse of identifiers. This represents a gap in implementing the control as there is no mechanism to prevent reuse of identifiers, which could otherwise lead to security risks such as impersonation or unauthorized access if identifiers were recycled."
     },
     {
       "control-id": "ia-5smt.a",
       "control-name": "Authenticator Management",
       "description": "Verifying, as part of the initial authenticator distribution, the identity of the individual, group, role, service, or device receiving the authenticator;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management. There is no process for verifying the identity of individuals or entities before distributing authenticators. This represents a significant gap in compliance with the Authenticator Management control, as there is no verification during initial authenticator distribution, leaving the system susceptible to unauthorized access and impersonation.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management, therefore it does not verify the identity of individuals or entities receiving authenticators at initial distribution. There is no management or verification control over authenticators in the service, representing a significant security gap."
     },
     {
       "control-id": "ia-5smt.b",
       "control-name": "Authenticator Management",
       "description": "Establishing initial authenticator content for any authenticators issued by the organization;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of authentication mechanisms, identity management, or credential issuance. Consequently, no authenticators are established, issued, or managed by the organization within this system, resulting in a clear gap related to this control.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management systems. Therefore, it does not establish, issue, or manage any authenticators, resulting in a clear gap regarding this control."
     },
     {
       "control-id": "ia-5smt.c",
       "control-name": "Authenticator Management",
       "description": "Ensuring that authenticators have sufficient strength of mechanism for their intended use;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management systems. As a result, there are no authenticators in use, and therefore no management or enforcement of authenticator strength. This represents a significant gap in meeting the control requirements for ensuring authenticators have sufficient strength.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or manage authenticators. There is no identity management, no credentials storage, and no measures ensuring the strength or management of authenticators. This represents a critical gap in meeting the control requirements for authenticator management."
     },
     {
       "control-id": "ia-5smt.d",
       "control-name": "Authenticator Management",
       "description": "Establishing and implementing administrative procedures for initial authenticator distribution, for lost or compromised or damaged authenticators, and for revoking authenticators;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or access control. Consequently, no administrative procedures exist for the distribution, recovery, or revocation of authenticators. This represents a clear security gap in authenticator management."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or session handling. Consequently, it lacks any administrative procedures or configurations related to issuing, revoking, or managing authenticators. This is a critical security gap because authenticator management is not addressed in any form.",
+      "configuration": ""
     },
     {
       "control-id": "ia-5smt.e",
       "control-name": "Authenticator Management",
       "description": "Changing default authenticators prior to first use;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanism, including use or management of authenticators. There is no concept of default or custom authenticators within the service. Therefore, the requirement to change default authenticators prior to first use is not met, representing a significant security gap.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service has no authentication mechanisms implemented. Therefore, there are no authenticators (default or otherwise) that can be changed prior to first use. This represents a critical gap, as the service is open to unauthorized access with no control over authentication credentials."
     },
     {
       "control-id": "ia-5smt.f",
       "control-name": "Authenticator Management",
       "description": "Changing or refreshing authenticators {{ insert: param, ia-05_odp.01 }} or when {{ insert: param, ia-05_odp.02 }} occur;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management systems. Therefore, there are no authenticators to change or refresh at any time. This represents a significant security gap because the control requires managing authenticators to maintain secure identity verification."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or session handling. Since there are no authenticators or credentials managed by the system, there is no process for changing or refreshing authenticators. This represents a significant security gap in compliance with the control requiring management of authenticators upon certain conditions.",
+      "configuration": ""
     },
     {
       "control-id": "ia-5smt.g",
       "control-name": "Authenticator Management",
       "description": "Protecting authenticator content from unauthorized disclosure and modification;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management. There are no authenticators (e.g., passwords, tokens, keys) managed or protected within the system. This constitutes a gap because authenticator content either does not exist or is not protected, leading to an absence of measures to prevent unauthorized disclosure or modification of authenticators."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or manage authenticators. Therefore, there is no protection of authenticator content from unauthorized disclosure or modification. This represents a significant security gap as authenticators are neither used nor secured.",
+      "configuration": ""
     },
     {
       "control-id": "ia-5smt.h",
       "control-name": "Authenticator Management",
       "description": "Requiring individuals to take, and having devices implement, specific controls to protect authenticators; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management systems. There are no controls in place requiring individuals to protect authenticators, nor are there device-level protections for authenticators. This represents a significant security gap, as the service is open to unauthorized access and lacks any form of credential management or protection.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or session handling. There are no controls in place to protect authenticators, nor are there configurations for managing or securing authentication credentials. This represents a critical gap in the implementation of the Authenticator Management control.",
       "configuration": ""
     },
     {
@@ -690,7 +689,7 @@
       "control-name": "Authenticator Management",
       "description": "Changing authenticators for group or role accounts when membership to those accounts changes.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or authorization models. Consequently, there are no authenticators, group accounts, or role accounts to manage. This absence means the control requiring changing authenticators when group membership changes is not satisfied, creating a security gap.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or support group or role accounts. Therefore, there is no functionality or process in place to manage authenticators when membership changes for such accounts. This represents a clear gap relative to the control requirement, which mandates managing authenticators for group or role accounts.",
       "configuration": "N/A"
     },
     {
@@ -698,7 +697,7 @@
       "control-name": "Password-based Authentication",
       "description": "Maintain a list of commonly-used, expected, or compromised passwords and update the list {{ insert: param, ia-05.01_odp.01 }} and when organizational passwords are suspected to have been compromised directly or indirectly;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanism, including password-based authentication. There is no identity management or credential handling system in place. Consequently, there is no maintenance or use of a list of commonly-used, expected, or compromised passwords, leaving the service vulnerable to unauthorized access and password-related security risks.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication. There is no password management, no storage or referencing of commonly-used or compromised password lists, nor procedures in place to update such lists when password compromise is suspected. This represents a significant security gap relative to the control requirements.",
       "configuration": ""
     },
     {
@@ -706,29 +705,29 @@
       "control-name": "Password-based Authentication",
       "description": "Verify, when users create or update passwords, that the passwords are not found on the list of commonly-used, expected, or compromised passwords in IA-5(1)(a);",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication. There is no identity management or user credential handling in place, therefore there is no password creation or update process. As a result, the control requiring verification against commonly-used or compromised password lists is not implemented, representing a clear security gap.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or password handling features. Since there are no password creation or update functionalities, the control requiring verification against commonly-used or compromised passwords is not addressed and represents a clear security gap."
     },
     {
       "control-id": "ia-5.1smt.c",
       "control-name": "Password-based Authentication",
       "description": "Transmit passwords only over cryptographically-protected channels;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication. Consequently, there are no passwords being transmitted, encrypted or otherwise. However, as the service does not use cryptographically protected channels (e.g., TLS), any future implementation of password-based authentication would transmit passwords over unprotected channels, violating the control. This presents a security gap that needs to be addressed by implementing secure authentication over encrypted channels."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication. As such, it does not transmit passwords at all \u2014 neither over cryptographically protected channels nor in plaintext. However, since it does not use cryptographically protected channels (e.g., TLS) for any data transmission, if password-based authentication were to be added, it would represent a significant security gap. Therefore, the service currently lacks both authentication and the necessary protected channel to secure password transmission, resulting in a gap for this control.",
+      "configuration": ""
     },
     {
       "control-id": "ia-5.1smt.d",
       "control-name": "Password-based Authentication",
       "description": "Store passwords using an approved salted key derivation function, preferably using a keyed hash;",
-      "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, nor does it handle or store user credentials or passwords. Consequently, there is no use of salted key derivation functions or any password storage at all. This represents a security gap with respect to the control which requires secure password storage."
+      "status": "not applicable",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or password storage. Therefore, password-based authentication and associated secure storage controls are not applicable to this system."
     },
     {
       "control-id": "ia-5.1smt.e",
       "control-name": "Password-based Authentication",
       "description": "Require immediate selection of a new password upon account recovery;",
       "status": "not applicable",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication or account recovery processes. Therefore, the requirement to prompt an immediate password change upon account recovery does not apply to this system.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication or account recovery processes. Therefore, the control to require immediate selection of a new password upon account recovery is not applicable to this system.",
       "configuration": ""
     },
     {
@@ -736,7 +735,7 @@
       "control-name": "Password-based Authentication",
       "description": "Allow user selection of long passwords and passphrases, including spaces and all printable characters;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication. As a result, there is no support for user-selected passwords, long passwords, passphrases, or any handling of password inputs. This represents a significant gap against the control requirements, as password authentication is entirely absent.",
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication. Consequently, there is no facility to allow users to select any passwords or passphrases, let alone long passwords or those including spaces and all printable characters. This represents a critical gap in the security posture as the system is open to unauthorized access without any user identity verification or authentication controls.",
       "configuration": ""
     },
     {
@@ -744,88 +743,88 @@
       "control-name": "Password-based Authentication",
       "description": "Employ automated tools to assist the user in selecting strong password authenticators; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication. There are no automated tools or configurations in place to assist users in selecting strong password authenticators, nor is there any identity management or password handling functionality. This represents a significant gap with respect to the control requirements."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication. There are no automated tools or manual processes to assist users in selecting strong password authenticators. This represents a clear gap in satisfying this control."
     },
     {
       "control-id": "ia-5.1smt.h",
       "control-name": "Password-based Authentication",
       "description": "Enforce the following composition and complexity rules: {{ insert: param, ia-05.01_odp.02 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including password-based authentication. There is no identity management or credential handling, so no composition or complexity rules for passwords are enforced. This represents a significant security gap as the system is open to unauthorized access without any password controls."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management systems. There is no password-based authentication or enforcement of password complexity or composition rules. As a result, this control is applicable to the service but represents a significant gap since no password-based authentication or related complexity enforcement is implemented.",
+      "configuration": ""
     },
     {
       "control-id": "ia-5.13",
       "control-name": "Expiration of Cached Authenticators",
       "description": "Prohibit the use of cached authenticators after {{ insert: param, ia-05.13_odp }}.",
       "status": "not applicable",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or session handling. Consequently, it does not cache any authenticators, making this control not applicable to the current system."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including the caching of authenticators. Since no cached authenticators are used or managed by the system, the control regarding expiration of cached authenticators is not applicable."
     },
     {
       "control-id": "ia-5.2smt.a",
       "control-name": "Public Key-based Authentication",
       "description": "For public key-based authentication:",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including public key-based authentication. There is no identity management, no session handling, and no access control implemented in the service components. As such, this control is applicable but currently represents a security gap."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including public key-based authentication. There is no identity management, no key management infrastructure, and no configuration that supports or enables public key authentication, representing a clear security gap for this control.",
+      "configuration": "N/A"
     },
     {
       "control-id": "ia-5.2smt.b",
       "control-name": "Public Key-based Authentication",
       "description": "When public key infrastructure (PKI) is used:",
       "status": "gap",
-      "explanation": "The TinyHTTP service currently implements no authentication mechanisms, including no use of public key infrastructure (PKI) for authentication. There is no identity management, key management, or secure configuration supporting PKI-based authentication. Thus, the control is applicable but represents a significant gap since PKI-based authentication is not implemented or configured anywhere in the service.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including public key infrastructure (PKI)-based authentication. There is no identity management, key management, or secure configuration for PKI. As such, the control is applicable but represents a gap because the service completely lacks public key-based authentication."
     },
     {
       "control-id": "ia-5.6",
       "control-name": "Protection of Authenticators",
       "description": "Protect authenticators commensurate with the security category of the information to which use of the authenticator permits access.",
       "status": "gap",
-      "explanation": "The TinyHTTP service implements no authentication mechanisms, identity management, or session handling. Therefore, it neither issues nor protects authenticators. This represents a critical security gap because no measures exist to protect credentials or authenticators \u2014 since none are implemented at all \u2014 exposing the system to unauthorized access.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, identity management, or session handling. Without authenticators implemented, there is no protection applied for authenticators. This represents a significant security gap as there is no protection commensurate with any security category; in fact, authenticators are absent entirely."
     },
     {
       "control-id": "ia-5.7",
       "control-name": "No Embedded Unencrypted Static Authenticators",
       "description": "Ensure that unencrypted static authenticators are not embedded in applications or other forms of static storage.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management. However, there is no evidence of embedded static authenticators being stored either encrypted or unencrypted within the application code or configurations. Despite this, the absence of authentication means that any static credentials or authenticators are irrelevant, leaving a security gap. Additionally, since no encryption or key management schemes exist, if static authenticators were added, they would not currently be protected. Therefore, the control is applicable but represents a gap because the system lacks measures to prevent unencrypted static authenticators and does not appear to use any authenticators at all, which results in insecure operations overall.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms or identity management, and there is no indication of embedded authenticators, encrypted or unencrypted, in the codebase or configurations. However, because the service lacks any authentication, it also does not verify the absence or secure storage of static authenticators. This absence of authentication presents a security gap, as no controls are in place to prevent unencrypted static authenticators from being embedded or mishandled. In other words, the control is applicable but currently not satisfied, and the system has a gap in ensuring that unencrypted static authenticators are not embedded because this aspect is not addressed at all."
     },
     {
       "control-id": "ia-6",
       "control-name": "Authentication Feedback",
       "description": "Obscure feedback of authentication information during the authentication process to protect the information from possible exploitation and use by unauthorized individuals.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication mechanisms. Since there is no authentication process, the control related to obscuring authentication feedback is not satisfied. This represents a significant security gap because the service neither authenticates users nor handles authentication feedback, leaving it open to unauthorized access without feedback mechanisms to obscure sensitive information."
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms; therefore, there is no authentication process during which feedback could be obscured. This represents a gap because lack of authentication means that no feedback controls are in place, and the system is vulnerable to unauthorized access and obviously provides no obscured or protected authentication feedback.",
+      "configuration": ""
     },
     {
       "control-id": "ia-7",
       "control-name": "Cryptographic Module Authentication",
       "description": "Implement mechanisms for authentication to a cryptographic module that meet the requirements of applicable laws, executive orders, directives, policies, regulations, standards, and guidelines for such authentication.",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any form of authentication mechanisms for accessing cryptographic modules, and there are no key management or encryption capabilities implemented. Without authentication controls protecting cryptographic modules, this control is not satisfied and represents a significant security gap.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, including for its cryptographic modules (which appear to be absent or unconfigured). There is no identity management, no access control, no session handling, and no key management in place. Without authentication to cryptographic modules, this control is not satisfied and represents a security gap."
     },
     {
       "control-id": "ia-8",
       "control-name": "Identification and Authentication (Non-organizational Users)",
       "description": "Uniquely identify and authenticate non-organizational users or processes acting on behalf of non-organizational users.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of authentication mechanisms, identity management, or session handling for any users, including non-organizational users. There are no unique identification or authentication controls in place, leaving the system fully open to unauthorized access and failing to meet the requirements of IA-8."
+      "explanation": "The TinyHTTP service does not implement any identification or authentication mechanisms for users, including non-organizational users. There is no identity management, credential handling, session tracking, or access control in place, which results in a gap against this control. Non-organizational users are not uniquely identified or authenticated before accessing the service.",
+      "configuration": ""
     },
     {
       "control-id": "sa-15.5",
       "control-name": "Attack Surface Reduction",
       "description": "Require the developer of the system, system component, or system service to reduce attack surfaces to {{ insert: param, sa-15.05_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any inherent attack surface reduction mechanisms within its design or codebase. There are no security controls such as authentication, authorization, encryption, or any hardened configurations that reduce the accessible attack vectors for the system. The service exposes HTTP and TCP servers without restriction or protective controls, meaning the attack surface remains broad and unmitigated. Since no documented configurations exist that reduce the attack surface, this represents a significant security gap."
+      "explanation": "The TinyHTTP service exposes multiple unprotected interfaces including asynchronous HTTP server, multi-threaded HTTP server, and a TCP echo server without any form of authentication, authorization, or encryption. There are no configurations or architectural design elements in place to reduce or limit the attack surface such as disabling unnecessary services, minimizing exposed endpoints, or enforcing strict input validation. Therefore, the service does not exhibit attack surface reduction as required by the control."
     },
     {
       "control-id": "sa-4.5smt.a",
       "control-name": "System, Component, and Service Configurations",
       "description": "Deliver the system, component, or service with {{ insert: param, sa-04.05_odp }} implemented; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not provide any documented system, component, or service configuration files (such as JSON or YAML) defining secure baseline configurations. No configuration exists that inherently enforces security controls or secure operational parameters. The service operates without authentication, encryption, or access control configurations, and there is no evidence of configuration-based controls to mitigate security risks. This represents a gap because secure configuration and baseline settings are absent, increasing the risk of misconfiguration and security vulnerabilities.",
+      "explanation": "The TinyHTTP service lacks documented or evident configurations enforcing secure system, component, or service settings as required by the control. There are no configuration files (e.g., JSON or YAML) provided that implement security-relevant parameters such as secure protocols, access controls, or encryption settings. The existing system components operate without authentication, encryption, or access controls, indicating that secure configuration management is not implemented.",
       "configuration": ""
     },
     {
@@ -833,7 +832,7 @@
       "control-name": "System, Component, and Service Configurations",
       "description": "Use the configurations as the default for any subsequent system, component, or service reinstallation or upgrade.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not have documented or implemented configuration management processes to ensure that system, component, or service configurations are preserved and reused for subsequent reinstallations or upgrades. There is no indication of configuration files being maintained or version-controlled as defaults for reinstalls or upgrades, which represents a gap in meeting this control.",
+      "explanation": "The TinyHTTP service lacks any documented or implemented configuration management for its system, components, or services that would serve as default presets for reinstallation or upgrades. There are no configuration files (e.g., JSON or YAML) present that persist or enforce default operational parameters upon redeployment or upgrade. This represents a gap in ensuring consistent and secure configurations across lifecycle events, increasing the risk of insecure or inconsistent deployments.",
       "configuration": ""
     },
     {
@@ -841,14 +840,15 @@
       "control-name": "Network Disconnect",
       "description": "Terminate the network connection associated with a communications session at the end of the session or after {{ insert: param, sc-10_odp }} of inactivity.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any session management or tracking, nor does it provide mechanisms to terminate network connections upon session end or after inactivity. There is no configuration or code controlling automatic disconnection of inactive sessions, leaving network connections potentially open indefinitely."
+      "explanation": "The TinyHTTP service handles TCP and HTTP connections but does not implement any session management or tracking. There is no mechanism to terminate network connections at the end of a session or after a period of inactivity. This lack of network disconnect controls represents a security gap that could allow stale or idle connections to remain open indefinitely, potentially increasing risk from unauthorized access or resource exhaustion.",
+      "configuration": ""
     },
     {
       "control-id": "sc-11smt.a",
       "control-name": "Trusted Path",
       "description": "Provide a {{ insert: param, sc-11_odp.01 }} isolated trusted communications path for communications between the user and the trusted components of the system; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any encrypted communication channel such as TLS or other secure protocols to establish a trusted path between the user and the system's trusted components. All data is transmitted without encryption, leaving the communication path vulnerable to interception and man-in-the-middle attacks. No configuration or code indicates the presence of an isolated trusted communication path.",
+      "explanation": "The TinyHTTP service does not implement any mechanisms to establish an isolated trusted communication path between the user and the system's trusted components. There is no use of encryption protocols such as TLS to secure communications in transit, nor are there authentication or session management mechanisms to verify user identity or isolate trusted sessions. Consequently, communications are vulnerable to interception and tampering, representing a clear security gap relative to this control.",
       "configuration": ""
     },
     {
@@ -856,14 +856,15 @@
       "control-name": "Trusted Path",
       "description": "Permit users to invoke the trusted communications path for communications between the user and the following security functions of the system, including at a minimum, authentication and re-authentication: {{ insert: param, sc-11_odp.02 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any authentication or re-authentication mechanisms, nor does it establish any trusted communication paths between users and security functions. Communications occur without encryption or secure channels, and there is no facility allowing users to invoke a trusted path for authentication-related interactions. This represents a significant security gap with respect to the Trusted Path control."
+      "explanation": "The TinyHTTP service does not implement any authentication or re-authentication mechanisms, and therefore does not establish a trusted communication path for these security functions. There is no secure user interaction channel for authentication or re-authentication, nor is there any indication of secure session handling or path protection. This represents a clear gap in fulfilling the trusted path requirement.",
+      "configuration": ""
     },
     {
       "control-id": "sc-2",
       "control-name": "Separation of System and User Functionality",
       "description": "Separate user functionality, including user interface services, from system management functionality.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any form of authentication, authorization, or access control to differentiate user functionality from system management functionality. There are no mechanisms or configurations in place to separate user interface services from system management functions. As a result, the system lacks any clear boundary or enforcement separating these roles, representing a significant gap in compliance with this control.",
+      "explanation": "The TinyHTTP service does not implement any mechanisms to separate system management functionality from user-facing functionality. There is no authentication, authorization, or access control in place to restrict system management capabilities to appropriate users. Additionally, no configuration or architectural components distinguish between user interface services and system management functions, thus violating the separation requirement.",
       "configuration": ""
     },
     {
@@ -871,36 +872,36 @@
       "control-name": "Session Authenticity",
       "description": "Protect the authenticity of communications sessions.",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any authentication mechanisms, session management, or session tracking. It does not implement encryption or integrity protections on communications sessions, leaving sessions vulnerable to interception, tampering, or impersonation. Therefore, the authenticity of communications sessions is not protected, representing a significant security gap.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any authentication mechanisms, session handling, or encryption in transit that can protect the authenticity of communication sessions. There is no use of secure session tokens, TLS, or any cryptographic methods to ensure the sessions are authentic and protected from interception or hijacking. This represents a significant gap in session authenticity controls."
     },
     {
       "control-id": "sc-23.1",
       "control-name": "Invalidate Session Identifiers at Logout",
       "description": "Invalidate session identifiers upon user logout or other session termination.",
       "status": "not applicable",
-      "explanation": "The TinyHTTP service does not implement any session management or tracking mechanisms. Since there are no session identifiers generated, maintained, or invalidated, this control is not applicable to the system."
+      "explanation": "The TinyHTTP service does not implement any session management or tracking. Without any session identifiers in use, there are none to invalidate upon logout or session termination. Therefore, this control is not applicable to the system.",
+      "configuration": ""
     },
     {
       "control-id": "sc-23.3",
       "control-name": "Unique System-generated Session Identifiers",
       "description": "Generate a unique session identifier for each session with {{ insert: param, sc-23.03_odp }} and recognize only session identifiers that are system-generated.",
-      "status": "not applicable",
-      "explanation": "The TinyHTTP service does not implement any session management or session tracking mechanisms. Since sessions and session identifiers are not part of the service's design or functionality, generating or recognizing unique system-generated session identifiers is not applicable."
+      "status": "gap",
+      "explanation": "The TinyHTTP service does not implement any session management or tracking functionality. As a result, no session identifiers\u2014system-generated or otherwise\u2014are created or recognized. This represents a critical gap in meeting the control requirements to generate unique system-generated session identifiers for each session and to recognize only system-generated identifiers."
     },
     {
       "control-id": "sc-23.5",
       "control-name": "Allowed Certificate Authorities",
       "description": "Only allow the use of {{ insert: param, sc-23.05_odp }} for verification of the establishment of protected sessions.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any encryption in transit or secure session establishment mechanisms such as TLS. There are no configurations or code indicating acceptance or validation of certificates from allowed certificate authorities. Therefore, the control is applicable given the service handles TCP/HTTP connections, but it is not satisfied and represents a security gap."
+      "explanation": "The TinyHTTP service does not implement any encryption for data in transit, including TLS or other protected sessions. There is no configuration, code, or mechanism to restrict or specify allowed Certificate Authorities for verifying protected sessions because protected sessions are not established at all. This represents a significant security gap as communications occur without verification of any certificate authority or use of secure channels."
     },
     {
       "control-id": "sc-24",
       "control-name": "Fail in Known State",
       "description": "Fail to a {{ insert: param, sc-24_odp.02 }} for the following failures on the indicated components while preserving {{ insert: param, sc-24_odp.03 }} in failure: {{ insert: param, sc-24_odp.01 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any fail-safe or fail-secure mechanisms in case of component failures. There is no evidence of the service failing to a known, safe state when failures occur in critical components such as the asynchronous HTTP server, threaded HTTP server, or TCP echo server. Without such functionality, the system risks unpredictable states during failures, potentially exposing security vulnerabilities or service outage. Moreover, the service lacks secure configuration and controls to enforce preservation of security properties (e.g., preserving confidentiality, integrity, or availability) during failure modes.",
+      "explanation": "The TinyHTTP service lacks explicit error handling mechanisms that ensure the system fails to a known safe state in the event of failures across its asynchronous HTTP server, multi-threaded HTTP server, or TCP echo server components. There is no configuration or code evidence showing fail-safe defaults or preservation of system security properties during failures. Consequently, the system may behave unpredictably or leave resources open upon failure, representing a security gap.",
       "configuration": ""
     },
     {
@@ -908,61 +909,60 @@
       "control-name": "Protection of Information at Rest",
       "description": "Protect the {{ insert: param, sc-28_odp.01 }} of the following information at rest: {{ insert: param, sc-28_odp.02 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any encryption or other protection mechanisms for information at rest. There are no configurations or code references suggesting protection of stored data, such as encryption, access controls, or key management. Sensitive information handled or generated by the service remains unprotected at rest, representing a significant security gap."
+      "explanation": "The TinyHTTP service does not implement any encryption mechanisms or security controls to protect information at rest. There is no evidence of encrypted storage, secure file systems, or any form of data protection for stored data. In addition, there is no key management or secure configuration related to data protection noted in the service's architecture or configuration files. This represents a critical gap with respect to the protection of information at rest as required by this control.",
+      "configuration": ""
     },
     {
       "control-id": "sc-28.1",
       "control-name": "Cryptographic Protection",
       "description": "Implement cryptographic mechanisms to prevent unauthorized disclosure and modification of the following information at rest on {{ insert: param, sc-28.01_odp.02 }}: {{ insert: param, sc-28.01_odp.01 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any cryptographic mechanisms to protect data at rest. There is no evidence of encryption being used for stored data or any configuration related to cryptographic protection. This represents a clear gap in compliance with the sc-28.1 control, as data stored by the service is susceptible to unauthorized disclosure and modification."
+      "explanation": "The TinyHTTP service does not implement any cryptographic mechanisms to protect data at rest. There is no encryption of stored data, no key management strategy, and no configuration or code indicating encryption or cryptographic protection applied to data handled or stored by the service. This represents a significant security gap in protecting sensitive information from unauthorized disclosure and modification when at rest.",
+      "configuration": ""
     },
     {
       "control-id": "sc-3",
       "control-name": "Security Function Isolation",
       "description": "Isolate security functions from nonsecurity functions.",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any implemented security functions such as authentication, authorization, encryption, or access control. Because no security functions exist, there is no isolation between security and nonsecurity functions, representing a clear gap in the implementation of this control.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any security functions such as authentication, authorization, encryption, or access control. Consequently, there are no isolated security functions separated from nonsecurity components. This represents a significant security gap, as security functions are not present, let alone isolated. Without these functions in place, the service cannot satisfy the requirement to isolate security functions from nonsecurity functions."
     },
     {
       "control-id": "sc-39",
       "control-name": "Process Isolation",
       "description": "Maintain a separate execution domain for each executing system process.",
-      "status": "gap",
-      "explanation": "The TinyHTTP service is implemented in Python and supports asynchronous and multi-threaded handling of HTTP requests. However, there is no indication from the provided summary or configuration details that individual system processes are isolated into separate execution domains, such as via containerization, OS-level process separation, or sandboxing mechanisms. The service appears to run multiple tasks within a shared environment without explicit process isolation, representing a gap in meeting the control's requirement to maintain separate execution domains per process.",
-      "configuration": ""
+      "status": "applicable but only satisfied through configuration",
+      "explanation": "The TinyHTTP service is implemented in Python and utilizes asynchronous and multi-threaded servers within a single process environment. The service relies on the underlying operating system process and thread management to maintain process isolation. The service itself does not explicitly implement process isolation programmatically but can achieve it through operating system process separation or containerization configurations.",
+      "configuration": "Process isolation for the TinyHTTP service can be enforced by deploying the service in isolated operating system processes or containers. For example, running multiple instances under separate systemd service units or Docker containers ensures each instance has its own execution domain. Relevant configuration would exist outside the application code in system or container orchestration configuration files, such as Docker Compose YAML files or systemd unit files. Since no explicit JSON/YAML configuration files for process isolation exist within the service codebase, the control is satisfied by deployment configurations external to the code."
     },
     {
       "control-id": "sc-4",
       "control-name": "Information in Shared System Resources",
       "description": "Prevent unauthorized and unintended information transfer via shared system resources.",
-      "status": "applicable but only satisfied through configuration",
-      "explanation": "The TinyHTTP service operates an HTTP and TCP server that handles concurrent connections potentially using multi-threading or asynchronous processing. Because multiple clients could access shared system resources (e.g., memory buffers, files, or concurrent TCP connections), unauthorized or unintended information transfer between users via these shared resources could occur. This necessitates strict configuration to isolate session data and prevent leakage of information across clients. The control is applicable and can be satisfied if appropriate isolation and resource access restrictions are configured in the server environment or service settings.",
-      "configuration": "No explicit configuration for isolation of shared resources or session separation was found in the provided context. The service currently lacks authentication, authorization, session management, and secure configuration that would enforce separation. To satisfy SC-4, configuration files (e.g. server_config.yaml or settings.json) should implement settings such as enabling per-connection resource isolation, restricting access rights to temporary files or shared memory segments, or configuring the server to cleanly separate client data buffers. For example, a hypothetical configuration snippet in server_config.yaml at line 42 could include:  \n\n```\nresource_isolation: true\nsession_separation: strict\nshared_memory_access: restricted\n```\n\nAbsent these configurations, the service is at risk of information leakage via shared resources."
+      "status": "gap",
+      "explanation": "The TinyHTTP service operates as an HTTP and TCP server with multi-threaded and asynchronous handling of requests, which inherently involves shared system resources such as memory and file handles. However, there is no documentation or configuration indicating any implemented measures to prevent unauthorized or unintended information transfer via these shared resources. Specifically, there are no access controls, isolation mechanisms, or resource sanitization practices evident to mitigate potential leakage or cross-client data exposure. This lack of controls represents a gap in compliance with SC-4.",
+      "configuration": ""
     },
     {
       "control-id": "sc-5smt.a",
       "control-name": "Denial-of-service Protection",
       "description": "{{ insert: param, sc-05_odp.02 }} the effects of the following types of denial-of-service events: {{ insert: param, sc-05_odp.01 }} ; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any denial-of-service (DoS) protection mechanisms. There are no configurations or code-level controls to detect, mitigate, or respond to DoS attacks. The service handles asynchronous and multi-threaded HTTP requests but lacks rate limiting, connection throttling, anomaly detection, or any network-level safeguards that could limit the impact of DoS events.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any mechanisms for denial-of-service (DoS) protection. There are no rate limiting, connection throttling, traffic filtering, or resource allocation controls in place to mitigate or minimize the effects of DoS events. Consequently, the service is vulnerable to various types of DoS attacks that could exhaust system resources such as CPU, memory, file descriptors, or network connections, leading to service unavailability."
     },
     {
       "control-id": "sc-5smt.b",
       "control-name": "Denial-of-service Protection",
       "description": "Employ the following controls to achieve the denial-of-service objective: {{ insert: param, sc-05_odp.03 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any denial-of-service (DoS) protection mechanisms. There are no rate limiting, request throttling, connection limiting, or other DoS mitigation configurations or code present in the asynchronous HTTP server, multi-threaded HTTP server, or TCP echo server components. The service is also lacking authentication and other access control measures that could help reduce unauthorized or abusive access patterns that lead to DoS attacks. Therefore, there is a clear gap in satisfying this control.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any explicit denial-of-service protection mechanisms. There are no rate limiting, connection throttling, filtering, or mitigation controls present in the asynchronous server, threaded server, or TCP echo server components. Furthermore, no configuration files or settings indicate any protection against DoS attacks. This represents a significant security gap, as the service is vulnerable to resource exhaustion and potential denial-of-service attacks."
     },
     {
       "control-id": "sc-5.1",
       "control-name": "Restrict Ability to Attack Other Systems",
       "description": "Restrict the ability of individuals to launch the following denial-of-service attacks against other systems: {{ insert: param, sc-05.01_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any form of authentication, authorization, or access control. As a result, there are no mechanisms in place to restrict individuals' ability to launch denial-of-service attacks against other systems through this service. Also, there are no configurations or protective controls implemented to prevent or limit DoS attacks originating from or through this service, representing a significant security gap.",
+      "explanation": "The TinyHTTP service does not implement any authentication, authorization, or access control mechanisms to restrict who can initiate network requests or control the behavior of TCP connections. There are no configured restrictions preventing users or clients from using the service to generate denial-of-service attacks against other systems. Without authentication or authorization controls, any user can potentially leverage the service's asynchronous HTTP server, multi-threaded server, or TCP echo server functionality to launch DoS attacks on other systems. No network-level or application-level configurations have been provided to limit outbound traffic or restrict harmful behaviors.",
       "configuration": ""
     },
     {
@@ -970,14 +970,14 @@
       "control-name": "Capacity, Bandwidth, and Redundancy",
       "description": "Manage capacity, bandwidth, or other redundancy to limit the effects of information flooding denial-of-service attacks.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanisms to manage capacity, bandwidth, or redundancy. There are no configurations or architectural components described that limit or mitigate the effects of denial-of-service (DoS) attacks, such as rate limiting, traffic shaping, load balancing, or failover redundancy. The service's handling of TCP and HTTP connections does not incorporate any control to prevent or manage information flooding, leaving it vulnerable to DoS attacks."
+      "explanation": "The TinyHTTP service does not implement any specific capacity management, bandwidth limiting, or redundancy features. There is no evidence of rate limiting, connection limiting, load balancing, or other mechanisms to mitigate the effects of denial-of-service attacks. The service handles TCP connections and HTTP requests asynchronously or via threading but lacks configuration or design elements addressing resource exhaustion or DoS resilience. Consequently, this represents a gap in addressing the sc-5.2 control."
     },
     {
       "control-id": "sc-8",
       "control-name": "Transmission Confidentiality and Integrity",
       "description": "Protect the confidentiality and integrity of transmitted information.",
       "status": "gap",
-      "explanation": "The TinyHTTP service transmits data in plaintext without any encryption or mechanisms to ensure transmission integrity. There is no implementation of TLS, SSL, or other cryptographic protocols to protect data in transit. Additionally, there are no configurations supporting secure transmission, such as enabling HTTPS or cryptographic libraries. Therefore, the service is vulnerable to interception, eavesdropping, and tampering of transmitted information, representing a significant security gap.",
+      "explanation": "The TinyHTTP service transmits data without any encryption or protection mechanisms, exposing sensitive information to interception or tampering during transmission. There is no implementation of TLS or any secure transport protocol to ensure confidentiality and integrity of data in transit.",
       "configuration": ""
     },
     {
@@ -985,7 +985,7 @@
       "control-name": "Cryptographic Protection",
       "description": "Implement cryptographic mechanisms to {{ insert: param, sc-08.01_odp }} during transmission.",
       "status": "gap",
-      "explanation": "The TinyHTTP service transmits data without any encryption in transit, exposing sensitive information to potential interception or tampering. There are no cryptographic mechanisms such as TLS or SSL implemented to protect data during transmission. This represents a significant security gap that must be addressed to comply with the cryptographic protection control.",
+      "explanation": "The TinyHTTP service does not implement any cryptographic mechanisms for data transmitted during network communication. Data is transmitted in plaintext without encryption, leaving it vulnerable to interception and tampering. No TLS, SSL, or alternative encryption protocols are used to protect data in transit, constituting a significant security gap.",
       "configuration": ""
     },
     {
@@ -993,14 +993,15 @@
       "control-name": "Pre- and Post-transmission Handling",
       "description": "Maintain the {{ insert: param, sc-08.02_odp }} of information during preparation for transmission and during reception.",
       "status": "gap",
-      "explanation": "The TinyHTTP service transmits data without encryption or any form of protection during transmission and reception. There are no mechanisms to maintain the confidentiality, integrity, or protection of information before sending it over the network or after receiving it. The absence of encryption protocols (like TLS) or data handling safeguards indicates a failure to maintain the required security controls for pre- and post-transmission information handling."
+      "explanation": "The TinyHTTP service transmits data without any form of encryption or protection during transmission and lacks mechanisms to ensure the confidentiality and integrity of information both before sending and after receiving. There are no implemented controls such as TLS encryption, data integrity checks, or secure buffering that would inherently satisfy this control. Consequently, sensitive information can be intercepted or tampered with during transmission, representing a clear security gap.",
+      "configuration": ""
     },
     {
       "control-id": "si-10",
       "control-name": "Information Input Validation",
       "description": "Check the validity of the following information inputs: {{ insert: param, si-10_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any explicit input validation mechanisms for incoming HTTP requests or TCP messages. The service code does not demonstrate sanitization or validation of user-supplied data, leaving it vulnerable to malicious inputs such as injection attacks or malformed data handling.",
+      "explanation": "The TinyHTTP service does not implement any input validation mechanisms across its components. There is no evidence of checks to verify the validity, format, or sanitization of HTTP request parameters, TCP messages, or any other inputs received by the service. This lack of input validation exposes the service to common risks such as injection attacks, malformed request handling, and potential service crashes caused by unexpected input data.",
       "configuration": ""
     },
     {
@@ -1008,14 +1009,14 @@
       "control-name": "Predictable Behavior",
       "description": "Verify that the system behaves in a predictable and documented manner when invalid inputs are received.",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanisms to handle invalid input predictably. There is no documentation or configuration indicating how invalid inputs (e.g., malformed HTTP requests, unexpected TCP messages) are processed or rejected. This absence means the system's behavior upon receiving invalid inputs is undefined, potentially leading to erratic behavior or security vulnerabilities such as denial of service or unexpected failures."
+      "explanation": "The TinyHTTP service does not implement any documented input validation or error handling mechanisms to ensure predictable behavior when invalid inputs are received. The summary and service description provide no evidence of input sanitation, rejection, or documented fallback behavior. This absence represents a gap in the control, as the system may behave unpredictably or inconsistently upon receiving malformed or unexpected inputs."
     },
     {
       "control-id": "si-11smt.a",
       "control-name": "Error Handling",
       "description": "Generate error messages that provide information necessary for corrective actions without revealing information that could be exploited; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any specific error handling strategies or configurations that sanitize or control error message content. Based on the provided overview, there is no mention of custom error messages or mechanisms to ensure that error outputs avoid leaking sensitive information. Without authentication, authorization, or session handling in place, coupled with the lack of documented error handling, any error generated by the service could potentially expose internal details or sensitive data, thus representing a security gap.",
+      "explanation": "The TinyHTTP service does not demonstrate any implemented error handling mechanism that ensures error messages are both informative for corrective action and sanitized to prevent leakage of sensitive or exploitable information. Given the lack of authentication, encryption, and structured logging, it is likely that generic or overly detailed error messages could be returned. There is no evidence of configuration or code that manages error message content securely, representing a clear gap in compliance with this control.",
       "configuration": ""
     },
     {
@@ -1023,7 +1024,7 @@
       "control-name": "Error Handling",
       "description": "Reveal error messages only to {{ insert: param, si-11_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service lacks any authentication or authorization mechanisms and does not implement access control to restrict error message visibility. There is no configuration or code indicating that error messages are selectively revealed only to authorized personnel (si-11_odp). Error messages are likely exposed to all users, including unauthorized ones, creating a security gap where sensitive error details could be revealed publicly.",
+      "explanation": "The TinyHTTP service does not implement any authentication or authorization mechanisms, and there is no indication of error handling processes that limit the exposure of error messages. Given that no identity or access management is in place, error messages would likely be revealed to any client, not restricted to authorized or designated personnel (si-11_odp). This exposes potentially sensitive information to unauthorized users.",
       "configuration": ""
     },
     {
@@ -1031,14 +1032,14 @@
       "control-name": "Memory Protection",
       "description": "Implement the following controls to protect the system memory from unauthorized code execution: {{ insert: param, si-16_odp }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service is implemented in Python and does not include any configurations or mechanisms to enforce memory protection controls such as DEP (Data Execution Prevention), ASLR (Address Space Layout Randomization), or other OS-level memory protections. Furthermore, the service does not manage or configure any system components that would inherently enforce such protections. Therefore, a gap exists as there is no implementation or configuration to prevent unauthorized code execution in memory."
+      "explanation": "The TinyHTTP service is implemented in Python and runs as a user-space application without any inherent memory protection mechanisms explicitly applied. There is no evidence of configurations or features such as Address Space Layout Randomization (ASLR), Data Execution Prevention (DEP), or other memory protection controls being enabled or enforced within the service or its deployment environment. Additionally, as a Python application, it relies on the underlying OS for memory protection, but there is no documented configuration or code to mitigate risks of unauthorized code execution in memory. Therefore, the control is applicable but represents a gap."
     },
     {
       "control-id": "si-4.12",
       "control-name": "Automated Organization-generated Alerts",
       "description": "Alert {{ insert: param, si-04.12_odp.01 }} using {{ insert: param, si-04.12_odp.02 }} when the following indications of inappropriate or unusual activities with security or privacy implications occur: {{ insert: param, si-04.12_odp.03 }}.",
       "status": "gap",
-      "explanation": "The TinyHTTP service currently does not implement any alert mechanisms for detecting inappropriate or unusual activities with security or privacy implications. There is no monitoring system or automated alerting configured to notify stakeholders when such events occur, resulting in a significant gap relative to this control.",
+      "explanation": "The TinyHTTP service does not implement any alert mechanisms for security or privacy-related unusual or inappropriate activities. There is no automated system to generate alerts based on such events, nor is there any monitoring infrastructure to detect or react to these activities. This represents a critical gap in compliance with control si-4.12.",
       "configuration": ""
     },
     {
@@ -1046,7 +1047,7 @@
       "control-name": "Security Alerts, Advisories, and Directives",
       "description": "Receive system security alerts, advisories, and directives from {{ insert: param, si-05_odp.01 }} on an ongoing basis;",
       "status": "gap",
-      "explanation": "The TinyHTTP service does not implement any mechanism to receive or process system security alerts, advisories, or directives. There is no alerting system, monitoring, or ongoing security notification framework integrated into the service, resulting in a gap for this control.",
+      "explanation": "The TinyHTTP service does not implement any mechanisms to receive or process system security alerts, advisories, or directives from the specified source. There is no configuration or component indicated in the provided context or documentation that facilitates ongoing receipt or handling of such security communications, representing a gap in this security control.",
       "configuration": ""
     },
     {
@@ -1054,7 +1055,7 @@
       "control-name": "Security Alerts, Advisories, and Directives",
       "description": "Generate internal security alerts, advisories, and directives as deemed necessary;",
       "status": "gap",
-      "explanation": "The TinyHTTP service currently lacks any implemented mechanisms for generating internal security alerts, advisories, or directives. There are no alert mechanisms or monitoring systems in place within the service, resulting in the absence of timely security notifications and incident awareness.",
+      "explanation": "The TinyHTTP service does not implement any alert mechanisms or monitoring systems to generate internal security alerts, advisories, or directives. There is no functionality or configuration present to detect, alert, or communicate security events internally, representing a clear gap in satisfying this control.",
       "configuration": ""
     },
     {
@@ -1062,17 +1063,16 @@
       "control-name": "Security Alerts, Advisories, and Directives",
       "description": "Disseminate security alerts, advisories, and directives to: {{ insert: param, si-05_odp.02 }} ; and",
       "status": "gap",
-      "explanation": "The TinyHTTP service currently does not implement any alert mechanisms or processes for the dissemination of security alerts, advisories, or directives. There are no monitoring or notification systems in place to detect, generate, or distribute security-related information to relevant stakeholders, representing a clear gap in meeting this control requirement.",
-      "configuration": ""
+      "explanation": "The TinyHTTP service does not implement any mechanisms to disseminate security alerts, advisories, or directives. There are no alert or notification systems configured or coded to notify relevant personnel or systems about security incidents or advisories. This represents a clear gap in meeting the control requirements."
     },
     {
       "control-id": "si-5smt.d",
       "control-name": "Security Alerts, Advisories, and Directives",
       "description": "Implement security directives in accordance with established time frames, or notify the issuing organization of the degree of noncompliance.",
       "status": "gap",
-      "explanation": "The TinyHTTP service currently lacks any mechanisms for receiving, processing, or implementing security alerts, advisories, or directives. There is no automated or manual process documented or configured to track or comply with security directives within established time frames. Furthermore, there is no functionality to notify issuing organizations in the event of noncompliance. This represents a significant gap in security posture and compliance readiness for this control.",
+      "explanation": "The TinyHTTP service does not implement any mechanisms to receive, process, or implement security alerts, advisories, or directives. There is no configuration, monitoring, notification system, or documented process for handling compliance with security directives within the service. Lack of alerting and response capabilities represents a gap relative to this control.",
       "configuration": ""
     }
   ],
-  "timestamp": "2025-05-24T20:50:02.761592"
+  "timestamp": "2025-05-24T22:56:27.030647"
 }
